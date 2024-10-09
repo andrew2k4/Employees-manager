@@ -1,0 +1,38 @@
+.navbar {
+  margin-bottom: 20px; /* Espacement en bas de la barre de navigation */
+}
+
+.navbar-brand {
+  font-size: 1.5rem; /* Taille de police du nom de l'application */
+}
+
+.nav-link {
+  color: #333; /* Couleur du texte des liens */
+}
+
+.nav-link:hover {
+  color: #007bff; /* Couleur du texte des liens au survol */
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px;
+  border-radius: 10%;
+  background-color: black;
+  color: white;
+  font-size: 14px;
+}
+
+.icon-display {
+  transform: scale(0.8);
+}

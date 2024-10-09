@@ -1,0 +1,28 @@
+<div class="w-50 mx-auto mt-10 parent">
+  <div class="text-black parent al">
+    <div class="child">
+      <h2 style="margin-left: 55px">Employee Sign-up</h2>
+    </div>
+    <form
+      class="d-flex flex-column gap-3"
+      [formGroup]="validateForm"
+      (ngSubmit)="submitForm()"
+    >
+      <label>Email:</label>
+      <input placeholder="email" formControlName="email" id="email" />
+      <label>Name:</label>
+      <input placeholder="name" formControlName="name" id="name" />
+      <label>Last name:</label>
+      <input placeholder="lastname" formControlName="lastName" id="lastName" />
+      <label>password:</label>
+      <input placeholder="password" formControlName="password" id="password" />
+      <label>paswordConfirmation:</label>
+      <input
+        placeholder="passwordConfirmation"
+        formControlName="passwordConfirmation"
+        id="passwordConfirmation"
+      />
+      <button type="submit">andrew</button>
+    </form>
+  </div>
+</div>
