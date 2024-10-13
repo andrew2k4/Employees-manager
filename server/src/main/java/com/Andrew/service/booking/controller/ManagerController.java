@@ -61,10 +61,10 @@ public class ManagerController {
 
 
 
-    @PostMapping({"/task/{userId}"})
-    public ResponseEntity<TaskDto> createTask(@PathVariable long userId, @RequestBody TaskDto taskDto) {
+    @PostMapping({"/task"})
+    public ResponseEntity<TaskDto> createTask( @RequestBody TaskDto taskDto) {
         System.out.print(taskDto);
-        boolean isCreated = managerService.postTask(userId, taskDto);
+        boolean isCreated = managerService.postTask(taskDto);
         if (isCreated) {
             return ResponseEntity.ok(taskDto);
         } else {

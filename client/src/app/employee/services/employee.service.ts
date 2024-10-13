@@ -2,13 +2,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserStorageService } from '../../basic/services/storage/user-storage.service';
-
 const Basic_Url = 'http://localhost:8080/';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ManagerService {
+export class EmployeeService {
   constructor(private http: HttpClient) {}
 
   postProject(projectDto: any): Observable<any> {

@@ -65,8 +65,8 @@ public class ManagerServiceImpl implements ManagerService {
 
 
     @Override
-    public boolean postTask(long userId, TaskDto taskDto) {
-        Optional<User> optionalUser = userRepository.findById(userId);
+    public boolean postTask( TaskDto taskDto) {
+        Optional<User> optionalUser = userRepository.findById(taskDto.getUserId());
         Optional<Project> optionalProject = projectRepository.findById((long) taskDto.getProjectId());
 
         if (optionalUser.isPresent() && optionalProject.isPresent()) {

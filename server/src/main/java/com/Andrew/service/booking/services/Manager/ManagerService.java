@@ -15,6 +15,6 @@ public interface ManagerService {
 
 
       TaskDto getTaskById(long taskId);
-      boolean postTask(long userId, TaskDto taskDto);
+      boolean postTask( TaskDto taskDto);
       List<TaskDto> getAllTasks();
 }
