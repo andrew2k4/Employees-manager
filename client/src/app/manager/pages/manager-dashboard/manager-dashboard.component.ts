@@ -26,7 +26,7 @@ export class ManagerDashboardComponent {
         for (let i = 0; i < this.projects.length; i++) {
           const project = {
             projectName: this.projects[i]?.projectName || 'Unknown Project', // Vérification de projectName
-            date: '16.10.2024',
+            date: this.projects[i]?.addedTime,
             clientName: this.projects[i]?.clientName,
             users: [],
           };
