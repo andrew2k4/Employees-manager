@@ -25,7 +25,7 @@ public class ManagerController {
     private ManagerService managerService;
 
     @PostMapping("/project/{userId}")
-   public ResponseEntity<?> postProject(@PathVariable long userId, @ModelAttribute DashboardDto projectDto){
+   public ResponseEntity<?> postProject(@PathVariable long userId, @RequestBody DashboardDto projectDto){
         System.out.println( projectDto);
         System.out.println( userId);
 
