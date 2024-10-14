@@ -48,7 +48,7 @@ export class CreateProjectComponent implements OnInit {
     this.managerService.postProject(projectData).subscribe(
       (res) => {
         console.log('Project posted successfully', res);
-        this.router.navigateByUrl('/manager/projects');
+        this.router.navigateByUrl('/manager/dashboard');
       },
       (error) => {
         console.error('Error posting project', error);

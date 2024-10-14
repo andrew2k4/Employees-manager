@@ -1,28 +1,40 @@
-import { Component } from '@angular/core';
-import { EmployeeService } from '../../services/employee.service';
-import { FormBuilder, FormGroup, Validator, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ManagerService } from '../../../manager/services/manager.service';
+import { EmployeeService } from '../../services/employee.service';
 
 @Component({
   selector: 'app-create-task',
   templateUrl: './create-task.component.html',
-  styleUrl: './create-task.component.scss',
+  styleUrls: ['./create-task.component.scss'],
 })
-export class CreateTaskComponent {
+export class CreateTaskComponent implements OnInit {
   validateForm!: FormGroup;
+  projects: any[] = []; // Initialiser la liste des projets
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private managerService: EmployeeService
+    private employeeService: EmployeeService
   ) {}
 
   ngOnInit(): void {
+    // Récupérer les projets depuis le service
+    this.employeeService.getAllProjects().subscribe(
+      (res) => {
+        console.log(res);
+        this.projects = res; // Stocker les projets récupérés
+      },
+      (error) => {
+        console.error('Error fetching projects', error);
+      }
+    );
+
+    // Initialiser le formulaire réactif
     this.validateForm = this.fb.group({
-      projectName: [null, [Validators.required]],
-      client: [null, [Validators.required]],
-      details: [null, [Validators.required]],
+      projectId: [null, [Validators.required]], // Dropdown pour le projet
+      description: [null, [Validators.required]],
+      hours: [null, [Validators.required]],
     });
   }
 
@@ -37,18 +49,21 @@ export class CreateTaskComponent {
       return;
     }
 
-    const formData: FormData = new FormData();
-    formData.append('projectName', this.validateForm.get('projectName')!.value);
-    formData.append('client', this.validateForm.get('client')!.value);
-    formData.append('details', this.validateForm.get('details')!.value);
+    const taskData = {
+      projectId: this.validateForm.get('projectId')!.value, // L'ID du projet sélectionné
+      description: this.validateForm.get('description')!.value,
+      hours: this.validateForm.get('hours')!.value,
+    };
 
-    this.managerService.postProject(formData).subscribe(
+    // Appel du service pour poster la tâche
+    this.employeeService.postTask(taskData).subscribe(
       (res) => {
-        console.log('Project posted successfully', res);
-        this.router.navigateByUrl('/manager/projects');
+        console.log('Task posted successfully', res);
+        this.router.navigateByUrl('/manager/dashboard');
       },
       (error) => {
-        console.error('Error posting project', error);
+        console.log(taskData);
+        console.error('Error posting task', error);
       }
     );
   }

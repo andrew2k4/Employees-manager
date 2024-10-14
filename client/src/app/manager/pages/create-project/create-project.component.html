@@ -1,6 +1,10 @@
 <div>
-  <h1>Create Project</h1>
-  <form [formGroup]="validateForm" (ngSubmit)="postProject()">
+  <h1 class="text-center">Projekt erstellen</h1>
+  <form
+    class="d-flex flex-column m-auto w-50"
+    [formGroup]="validateForm"
+    (ngSubmit)="postProject()"
+  >
     <label> Name </label>
     <input
       placeholder="project name"
@@ -14,6 +18,6 @@
     <label> Details </label>
     <input placeholder="details" formControlName="details" id="details" />
 
-    <input type="submit" name="create project" value="erstellen" />
+    <input class="mt-5" type="submit" name="create project" value="erstellen" />
   </form>
 </div>
