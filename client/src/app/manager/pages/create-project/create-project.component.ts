@@ -40,8 +40,8 @@ export class CreateProjectComponent implements OnInit {
     // Créer un objet JSON avec les données du formulaire
     const projectData = {
       projectName: this.validateForm.get('projectName')!.value,
-      client: this.validateForm.get('client')!.value,
-      details: this.validateForm.get('details')!.value,
+      clientName: this.validateForm.get('client')!.value,
+      description: this.validateForm.get('details')!.value,
     };
 
     // Appeler le service pour envoyer les données au serveur

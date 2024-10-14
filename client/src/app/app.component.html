@@ -4,7 +4,11 @@
     *ngIf="!isEmployeeLoggedIn && !isManagerLoggedIn"
   >
     <h2 class="m-0">Sommermetallwerkstadt</h2>
-    <div>
+    <div class="gap-3 d-flex flex-row">
+      <a class="login-button" href="/register">
+        <mat-icon class="icon-display">login</mat-icon>
+        registrierung
+      </a>
       <a class="login-button" href="/login">
         <mat-icon class="icon-display">login</mat-icon>
         Anmeldung
