@@ -41,6 +41,7 @@ public class ManagerServiceImpl implements ManagerService {
             project.setProjectName(DashboardDto.getProjectName());
             project.setClientName(DashboardDto.getClientName());
             project.setDescription(DashboardDto.getDetails());
+            project.setAddedTime(LocalDateTime.now());
 
 
             projectRepository.save(project);

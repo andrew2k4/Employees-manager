@@ -5,6 +5,7 @@ import com.Andrew.service.booking.dto.ProjectDto;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,7 +22,10 @@ public class Project {
 
     private String clientName;
 
-    private String Description;
+    private String description;
+
+    private LocalDateTime addedTime;
+
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<Task>();
@@ -35,6 +39,7 @@ public class Project {
         DashboardDto.setId(id);
         DashboardDto.setProjectName(projectName);
         DashboardDto.setClientName(clientName);
+        DashboardDto.setAddedTime(addedTime);
         DashboardDto.setTasks(tasks.stream().map(Task::getDto).collect(Collectors.toList()));
         DashboardDto.setUsers(users.stream().map(User::getDto).collect(Collectors.toList()));
 
