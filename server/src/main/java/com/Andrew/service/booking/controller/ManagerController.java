@@ -1,6 +1,7 @@
 package com.Andrew.service.booking.controller;
 
 import com.Andrew.service.booking.Repository.TaskRepository;
+import com.Andrew.service.booking.dto.DashboardDto;
 import com.Andrew.service.booking.dto.ProjectDto;
 import com.Andrew.service.booking.dto.TaskDto;
 import com.Andrew.service.booking.services.Manager.ManagerService;
@@ -24,7 +25,7 @@ public class ManagerController {
     private ManagerService managerService;
 
     @PostMapping("/project/{userId}")
-   public ResponseEntity<?> postProject(@PathVariable long userId, @RequestBody ProjectDto projectDto){
+   public ResponseEntity<?> postProject(@PathVariable long userId, @ModelAttribute DashboardDto projectDto){
         System.out.println( projectDto);
         System.out.println( userId);
 
@@ -43,13 +44,17 @@ public class ManagerController {
 
     @GetMapping({"/projects"})
     public ResponseEntity<?> getAllProjects(){
-        return ResponseEntity.ok(managerService.getAllProjects());
+        return ResponseEntity.ok(managerService.getAllProject());
     }
 
+    @GetMapping({"/dashboard"})
+    public ResponseEntity<?> getDashboard(){
+        return ResponseEntity.ok(managerService.getDashboard());
+    }
 
     @GetMapping({"/project/{projectId}"})
     public ResponseEntity<?> getProjectById(@PathVariable Long projectId){
-        ProjectDto projectDto = managerService.getProjectById(projectId);
+        DashboardDto projectDto = managerService.getProjectById(projectId);
 
         if(projectDto != null){
             return ResponseEntity.ok(projectDto);
@@ -59,12 +64,10 @@ public class ManagerController {
     }
 
 
-
-
-    @PostMapping({"/task"})
-    public ResponseEntity<TaskDto> createTask( @RequestBody TaskDto taskDto) {
+    @PostMapping({"/task/{userId}"})
+    public ResponseEntity<TaskDto> createTask(@PathVariable long userId, @RequestBody TaskDto taskDto) {
         System.out.print(taskDto);
-        boolean isCreated = managerService.postTask(taskDto);
+        boolean isCreated = managerService.postTask(userId , taskDto);
         if (isCreated) {
             return ResponseEntity.ok(taskDto);
         } else {

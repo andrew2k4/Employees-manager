@@ -15,8 +15,5 @@ public class TaskDto {
     private LocalDateTime addedTime;
     private long projectId;
     private long userId;
-
-
-
 }
 

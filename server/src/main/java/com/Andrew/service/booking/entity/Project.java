@@ -1,5 +1,6 @@
 package com.Andrew.service.booking.entity;
 
+import com.Andrew.service.booking.dto.DashboardDto;
 import com.Andrew.service.booking.dto.ProjectDto;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class Project {
 
     private String projectName;
 
-    private String Client;
+    private String clientName;
 
     private String Description;
 
@@ -28,13 +29,23 @@ public class Project {
     @ManyToMany(mappedBy = "projects") // Inverse relationship in Project
     private List<User> users = new ArrayList<>();
 
-    public ProjectDto getDto(){
+    public DashboardDto getDto(){
+        DashboardDto DashboardDto = new DashboardDto();
+
+        DashboardDto.setId(id);
+        DashboardDto.setProjectName(projectName);
+        DashboardDto.setClientName(clientName);
+        DashboardDto.setTasks(tasks.stream().map(Task::getDto).collect(Collectors.toList()));
+        DashboardDto.setUsers(users.stream().map(User::getDto).collect(Collectors.toList()));
+
+        return DashboardDto;
+    }
+
+    public ProjectDto getProjectDto(){
         ProjectDto projectDto = new ProjectDto();
 
         projectDto.setId(id);
         projectDto.setProjectName(projectName);
-        projectDto.setTasks(tasks.stream().map(Task::getDto).collect(Collectors.toList()));
-        projectDto.setUsers(users.stream().map(User::getDto).collect(Collectors.toList()));
 
         return projectDto;
     }

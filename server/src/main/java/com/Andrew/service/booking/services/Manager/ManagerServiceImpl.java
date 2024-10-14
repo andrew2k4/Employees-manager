@@ -3,6 +3,8 @@ package com.Andrew.service.booking.services.Manager;
 import com.Andrew.service.booking.Repository.ProjectRepository;
 import com.Andrew.service.booking.Repository.TaskRepository;
 import com.Andrew.service.booking.Repository.UserRepository;
+import com.Andrew.service.booking.dto.DashboardDto;
+import com.Andrew.service.booking.dto.DashboardDto;
 import com.Andrew.service.booking.dto.ProjectDto;
 import com.Andrew.service.booking.dto.TaskDto;
 import com.Andrew.service.booking.entity.Project;
@@ -13,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -31,15 +32,15 @@ public class ManagerServiceImpl implements ManagerService {
     private TaskRepository taskRepository;
 
     @Override
-    public boolean postProject(long userId, ProjectDto projectDto) {
+    public boolean postProject(long userId, DashboardDto DashboardDto) {
         Optional<User> optionalUser = userRepository.findById(userId);
 
         if (optionalUser.isPresent()) {
             Project project = new Project();
 
-            project.setProjectName(projectDto.getProjectName());
-            project.setClient(projectDto.getClient());
-            project.setDescription(projectDto.getDetails());
+            project.setProjectName(DashboardDto.getProjectName());
+            project.setClientName(DashboardDto.getClientName());
+            project.setDescription(DashboardDto.getDetails());
 
 
             projectRepository.save(project);
@@ -51,12 +52,19 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     @Transactional
-    public List<ProjectDto> getAllProjects() {
+    public List<DashboardDto> getDashboard() {
         return projectRepository.findAll().stream().map(Project::getDto).collect(Collectors.toList());
     }
 
     @Override
-    public ProjectDto getProjectById(long projectId) {
+    public List<ProjectDto> getAllProject(){
+        return projectRepository.findAll().stream().map(Project::getProjectDto).collect(Collectors.toList());
+    }
+    
+
+
+    @Override
+    public DashboardDto getProjectById(long projectId) {
         Optional<Project> optionalProject = projectRepository.findById(projectId);
 
         return optionalProject.map(Project::getDto).orElse(null);
@@ -65,8 +73,8 @@ public class ManagerServiceImpl implements ManagerService {
 
 
     @Override
-    public boolean postTask( TaskDto taskDto) {
-        Optional<User> optionalUser = userRepository.findById(taskDto.getUserId());
+    public boolean postTask(long userId,TaskDto taskDto) {
+        Optional<User> optionalUser = userRepository.findById(userId);
         Optional<Project> optionalProject = projectRepository.findById((long) taskDto.getProjectId());
 
         if (optionalUser.isPresent() && optionalProject.isPresent()) {
