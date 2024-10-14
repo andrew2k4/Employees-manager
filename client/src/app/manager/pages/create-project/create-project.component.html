@@ -1,19 +1,19 @@
 <div>
   <h1>Create Project</h1>
   <form [formGroup]="validateForm" (ngSubmit)="postProject()">
-    <label> name </label>
+    <label> Name </label>
     <input
       placeholder="project name"
       formControlName="projectName"
       id="projectName"
     />
 
-    <label> client </label>
+    <label> Client </label>
     <input placeholder="client name" formControlName="client" id="clientName" />
 
-    <label> details </label>
+    <label> Details </label>
     <input placeholder="details" formControlName="details" id="details" />
 
-    <input type="submit" name="create project" />
+    <input type="submit" name="create project" value="erstellen" />
   </form>
 </div>

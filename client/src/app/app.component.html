@@ -1,10 +1,46 @@
 <nav class="navbar navbar-light bg-light p-6">
-  <div class="container d-flex justify-content-between align-items-center">
+  <div
+    class="container d-flex justify-content-between align-items-center"
+    *ngIf="!isEmployeeLoggedIn && !isManagerLoggedIn"
+  >
     <h2 class="m-0">Sommermetallwerkstadt</h2>
+    <div>
+      <a class="login-button" href="/login">
+        <mat-icon class="icon-display">login</mat-icon>
+        Anmeldung
+      </a>
+    </div>
+  </div>
 
-    <a class="login-button" href="/login">
-      <mat-icon class="icon-display">login</mat-icon>
-      Login
+  <div
+    class="container d-flex justify-content-between align-items-center"
+    *ngIf="isManagerLoggedIn"
+  >
+    <h2 class="m-0">Sommermetallwerkstadt - Manager</h2>
+    <div class="d-flex justify-content-between gap-2">
+      <a class="login-button" href="/manager/dashboard">
+        <mat-icon class="icon-display">dashboard</mat-icon>
+        Dashboard
+      </a>
+      <a class="login-button" href="/manager/project">
+        <mat-icon class="icon-display">create</mat-icon>
+        Projekt erstellen
+      </a>
+      <a class="logout-button" href="/logout" (click)="logout()">
+        <mat-icon class="icon-display">logout</mat-icon>
+        Abmeldung
+      </a>
+    </div>
+  </div>
+
+  <div
+    class="container d-flex justify-content-between align-items-center"
+    *ngIf="isEmployeeLoggedIn && !isManagerLoggedIn"
+  >
+    <h2 class="m-0">Sommermetallwerkstadt - Employee</h2>
+    <a class="logout-button" href="/logout" (click)="logout()">
+      <mat-icon class="icon-display">logout</mat-icon>
+      Abmeldung
     </a>
   </div>
 </nav>

@@ -37,10 +37,10 @@ export class EmployeeService {
   }
 
   createAuthorizationHeader(): HttpHeaders {
-    let authHeaders: HttpHeaders = new HttpHeaders();
-    return authHeaders.set(
-      'Authorization',
-      'Bearer ' + UserStorageService.getToken()
-    );
+    const token = UserStorageService.getToken(); // Récupérer le token
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Ajouter le token dans le header d'autorisation
+      'Content-Type': 'application/json', // Préciser que le corps est du JSON
+    });
   }
 }

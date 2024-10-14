@@ -6,7 +6,7 @@ import { ManagerService } from '../../services/manager.service';
 @Component({
   selector: 'app-create-project',
   templateUrl: './create-project.component.html',
-  styleUrls: ['./create-project.component.scss'], // Corrected from `styleUrl` to `styleUrls`
+  styleUrls: ['./create-project.component.scss'],
 })
 export class CreateProjectComponent implements OnInit {
   validateForm!: FormGroup;
@@ -26,6 +26,7 @@ export class CreateProjectComponent implements OnInit {
   }
 
   postProject(): void {
+    // Valider le formulaire
     if (this.validateForm.invalid) {
       for (const i in this.validateForm.controls) {
         if (this.validateForm.controls.hasOwnProperty(i)) {
@@ -36,12 +37,15 @@ export class CreateProjectComponent implements OnInit {
       return;
     }
 
-    const formData: FormData = new FormData();
-    formData.append('projectName', this.validateForm.get('projectName')!.value);
-    formData.append('client', this.validateForm.get('client')!.value);
-    formData.append('details', this.validateForm.get('details')!.value);
+    // Créer un objet JSON avec les données du formulaire
+    const projectData = {
+      projectName: this.validateForm.get('projectName')!.value,
+      client: this.validateForm.get('client')!.value,
+      details: this.validateForm.get('details')!.value,
+    };
 
-    this.managerService.postProject(formData).subscribe(
+    // Appeler le service pour envoyer les données au serveur
+    this.managerService.postProject(projectData).subscribe(
       (res) => {
         console.log('Project posted successfully', res);
         this.router.navigateByUrl('/manager/projects');

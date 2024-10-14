@@ -8,7 +8,7 @@ import { ManagerService } from '../../services/manager.service';
 })
 export class ManagerDashboardComponent {
   projects: any;
-  mappedProjects: any[] = []; // Initialize mappedProjects as an empty array
+  mappedProjects: any[any] = []; // Initialise mappedProjects en tant que tableau vide
 
   constructor(private managerService: ManagerService) {}
 
@@ -21,41 +21,50 @@ export class ManagerDashboardComponent {
       this.projects = res;
       console.log(res);
 
-      for (let i = 0; i < this.projects.length; i++) {
-        const project = {
-          projectName: this.projects[i].projectName, // Optionally include project-specific data
-          users: [],
-        };
+      // Vérification si "projects" est un tableau valide
+      if (Array.isArray(this.projects)) {
+        for (let i = 0; i < this.projects.length; i++) {
+          const project = {
+            projectName: this.projects[i]?.projectName || 'Unknown Project', // Vérification de projectName
+            date: '16.10.2024',
+            clientName: this.projects[i]?.clientName,
+            users: [],
+          };
 
-        for (let j = 0; j < this.projects[i].users.length; j++) {
-          let taskUser: any[] = [];
-          let userId = this.projects[i].users[j].id;
-          let hoursTravailler = 0; // Initialize hours counter for each user
+          // Vérifier si "users" existe et est un tableau
+          if (Array.isArray(this.projects[i]?.users)) {
+            for (let j = 0; j < this.projects[i].users.length; j++) {
+              let taskUser: any[] = [];
+              let userId = this.projects[i].users[j].id;
+              let hoursTravailler = 0; // Initialisation des heures pour chaque utilisateur
 
-          // Loop through the tasks of the project to find tasks associated with the user
-          if (this.projects[i].tasks) {
-            // Check if tasks exist
-            for (let k = 0; k < this.projects[i].tasks.length; k++) {
-              if (this.projects[i].tasks[k].userId === userId) {
-                taskUser.push(this.projects[i].tasks[k]); // Add task to the user's task list
-                hoursTravailler += this.projects[i].tasks[k].hours; // Sum up hours worked
+              // Vérifier si "tasks" existe et est un tableau
+              if (Array.isArray(this.projects[i]?.tasks)) {
+                for (let k = 0; k < this.projects[i].tasks.length; k++) {
+                  if (this.projects[i].tasks[k].userId === userId) {
+                    taskUser.push(this.projects[i].tasks[k]); // Ajoute la tâche à l'utilisateur
+                    hoursTravailler += this.projects[i].tasks[k].hours; // Ajoute les heures travaillées
+                  }
+                }
               }
+
+              // Ajouter l'utilisateur et ses tâches au projet
+              project.users.push({
+                user: this.projects[i].users[j], // Utilisateur actuel
+                tasks: taskUser, // Liste des tâches associées à cet utilisateur
+                hoursTravailler: hoursTravailler, // Total des heures travaillées
+              });
             }
           }
 
-          // Push the user and their associated tasks to the users array in the project object
-          project.users.push({
-            user: this.projects[i].users[j], // Current user
-            tasks: taskUser, // List of tasks associated with this user
-            hoursTravailler: hoursTravailler, // Total hours worked by the user
-          });
+          // Ajouter le projet avec les utilisateurs et leurs tâches à mappedProjects
+          this.mappedProjects.push(project);
         }
-
-        // Add the constructed project with users and their tasks to mappedProjects
-        this.mappedProjects.push(project);
+      } else {
+        console.error("La réponse des projets n'est pas un tableau valide");
       }
 
-      console.log(this.mappedProjects); // Output the mapped result to the console
+      console.log(this.mappedProjects); // Affiche le résultat mappé dans la console
     });
   }
 }
