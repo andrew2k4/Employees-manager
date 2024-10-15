@@ -24,7 +24,9 @@ public class Project {
 
     private String description;
 
-    private LocalDateTime addedTime;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
 
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -39,7 +41,9 @@ public class Project {
         DashboardDto.setId(id);
         DashboardDto.setProjectName(projectName);
         DashboardDto.setClientName(clientName);
-        DashboardDto.setAddedTime(addedTime);
+        DashboardDto.setCreatedAt(createdAt);
+        DashboardDto.setUpdatedAt(updatedAt);
+
         DashboardDto.setTasks(tasks.stream().map(Task::getDto).collect(Collectors.toList()));
         DashboardDto.setUsers(users.stream().map(User::getDto).collect(Collectors.toList()));
 

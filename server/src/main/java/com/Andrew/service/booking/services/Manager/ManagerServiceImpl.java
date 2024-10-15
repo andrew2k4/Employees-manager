@@ -41,7 +41,8 @@ public class ManagerServiceImpl implements ManagerService {
             project.setProjectName(DashboardDto.getProjectName());
             project.setClientName(DashboardDto.getClientName());
             project.setDescription(DashboardDto.getDetails());
-            project.setAddedTime(LocalDateTime.now());
+            project.setCreatedAt(LocalDateTime.now());
+            project.setUpdatedAt(LocalDateTime.now());
 
 
             projectRepository.save(project);
@@ -90,11 +91,12 @@ public class ManagerServiceImpl implements ManagerService {
 
             // If assigning the user to the project is required, otherwise remove it
             Project project = optionalProject.get();
+            project.setUpdatedAt(LocalDateTime.now());
             if (!user.getProjects().contains(project)) {
                 user.getProjects().add(project);
                 userRepository.save(user); // Save only if a new project is added
             }
-
+            projectRepository.save(project);
             taskRepository.save(task);
             return true;
         }
