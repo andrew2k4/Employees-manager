@@ -1,8 +1,8 @@
 package com.Andrew.service.booking.services.authentication;
 
 import com.Andrew.service.booking.Repository.UserRepository;
-import com.Andrew.service.booking.dto.SignupRequestDTO;
-import com.Andrew.service.booking.dto.UserDto;
+import com.Andrew.service.booking.dto.authDtos.SignupRequestDTO;
+import com.Andrew.service.booking.dto.userDtos.UserDto;
 import com.Andrew.service.booking.entity.User;
 import com.Andrew.service.booking.enums.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;

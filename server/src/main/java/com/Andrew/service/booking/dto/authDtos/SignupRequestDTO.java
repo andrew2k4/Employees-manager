@@ -1,4 +1,4 @@
-package com.Andrew.service.booking.dto;
+package com.Andrew.service.booking.dto.authDtos;
 
 import com.Andrew.service.booking.enums.UserRole;
 import lombok.Data;

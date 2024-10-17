@@ -1,7 +1,7 @@
 package com.Andrew.service.booking.entity;
 
-import com.Andrew.service.booking.dto.DashboardDto;
-import com.Andrew.service.booking.dto.ProjectDto;
+import com.Andrew.service.booking.dto.projectdtos.DashboardDto;
+import com.Andrew.service.booking.dto.projectdtos.ProjectDto;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -43,8 +43,6 @@ public class Project {
         DashboardDto.setClientName(clientName);
         DashboardDto.setCreatedAt(createdAt);
         DashboardDto.setUpdatedAt(updatedAt);
-
-        DashboardDto.setTasks(tasks.stream().map(Task::getDto).collect(Collectors.toList()));
         DashboardDto.setUsers(users.stream().map(User::getDto).collect(Collectors.toList()));
 
         return DashboardDto;
@@ -58,4 +56,7 @@ public class Project {
 
         return projectDto;
     }
+
+
+
 }
