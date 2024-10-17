@@ -1,14 +1,11 @@
 package com.Andrew.service.booking.controller;
 
 import com.Andrew.service.booking.Repository.TaskRepository;
-import com.Andrew.service.booking.dto.DashboardDto;
-import com.Andrew.service.booking.dto.ProjectDto;
-import com.Andrew.service.booking.dto.TaskDto;
+import com.Andrew.service.booking.dto.projectdtos.DashboardDto;
+import com.Andrew.service.booking.dto.taskDtos.TaskDto;
 import com.Andrew.service.booking.services.Manager.ManagerService;
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

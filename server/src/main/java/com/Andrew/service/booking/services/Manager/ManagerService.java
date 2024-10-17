@@ -1,8 +1,8 @@
 package com.Andrew.service.booking.services.Manager;
 
-import com.Andrew.service.booking.dto.DashboardDto;
-import com.Andrew.service.booking.dto.ProjectDto;
-import com.Andrew.service.booking.dto.TaskDto;
+import com.Andrew.service.booking.dto.projectdtos.DashboardDto;
+import com.Andrew.service.booking.dto.projectdtos.ProjectDto;
+import com.Andrew.service.booking.dto.taskDtos.TaskDto;
 
 import java.util.List;
 

@@ -3,10 +3,9 @@ package com.Andrew.service.booking.services.Manager;
 import com.Andrew.service.booking.Repository.ProjectRepository;
 import com.Andrew.service.booking.Repository.TaskRepository;
 import com.Andrew.service.booking.Repository.UserRepository;
-import com.Andrew.service.booking.dto.DashboardDto;
-import com.Andrew.service.booking.dto.DashboardDto;
-import com.Andrew.service.booking.dto.ProjectDto;
-import com.Andrew.service.booking.dto.TaskDto;
+import com.Andrew.service.booking.dto.projectdtos.DashboardDto;
+import com.Andrew.service.booking.dto.projectdtos.ProjectDto;
+import com.Andrew.service.booking.dto.taskDtos.TaskDto;
 import com.Andrew.service.booking.entity.Project;
 import com.Andrew.service.booking.entity.Task;
 import com.Andrew.service.booking.entity.User;
@@ -41,7 +40,8 @@ public class ManagerServiceImpl implements ManagerService {
             project.setProjectName(DashboardDto.getProjectName());
             project.setClientName(DashboardDto.getClientName());
             project.setDescription(DashboardDto.getDetails());
-            project.setAddedTime(LocalDateTime.now());
+            project.setCreatedAt(LocalDateTime.now());
+            project.setUpdatedAt(LocalDateTime.now());
 
 
             projectRepository.save(project);
@@ -85,16 +85,18 @@ public class ManagerServiceImpl implements ManagerService {
             task.setDescription(taskDto.getDescription());
             task.setAddedTime(LocalDateTime.now()); // Use LocalDateTime instead of Date
             task.setHours(taskDto.getHours());
-            task.setUser(user.getId()); // Assign the User object directly to the task
+            task.setUser(user); // Assign the User object directly to the task
             task.setProject(optionalProject.get());
 
             // If assigning the user to the project is required, otherwise remove it
             Project project = optionalProject.get();
+            project.setUpdatedAt(LocalDateTime.now());
+            projectRepository.save(project);
             if (!user.getProjects().contains(project)) {
                 user.getProjects().add(project);
                 userRepository.save(user); // Save only if a new project is added
             }
-
+            projectRepository.save(project);
             taskRepository.save(task);
             return true;
         }

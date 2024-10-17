@@ -1,10 +1,10 @@
 package com.Andrew.service.booking.controller;
 
-import com.Andrew.service.booking.dto.AuthentificationRequest;
-import com.Andrew.service.booking.dto.SignupRequestDTO;
+import com.Andrew.service.booking.dto.authDtos.AuthentificationRequest;
+import com.Andrew.service.booking.dto.authDtos.SignupRequestDTO;
 import com.Andrew.service.booking.entity.User;
 import com.Andrew.service.booking.Repository.UserRepository;
-import com.Andrew.service.booking.dto.UserDto;
+import com.Andrew.service.booking.dto.userDtos.UserDto;
 import com.Andrew.service.booking.services.authentication.AuthService;
 import com.Andrew.service.booking.services.jwt.UserDetailsServiceImpl;
 import com.Andrew.service.booking.utils.JwtUtil;

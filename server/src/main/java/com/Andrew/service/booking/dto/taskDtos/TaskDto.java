@@ -1,10 +1,8 @@
-package com.Andrew.service.booking.dto;
+package com.Andrew.service.booking.dto.taskDtos;
 
-import com.Andrew.service.booking.entity.User;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Data
 public class TaskDto {

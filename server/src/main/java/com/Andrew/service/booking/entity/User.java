@@ -1,12 +1,13 @@
 package com.Andrew.service.booking.entity;
 
-import com.Andrew.service.booking.dto.UserDto;
+import com.Andrew.service.booking.dto.userDtos.UserDto;
 import com.Andrew.service.booking.enums.UserRole;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users")
@@ -37,6 +38,10 @@ public class User {
     )
     private List<Project> projects = new ArrayList<>();
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks = new ArrayList<Task>();
+
     public UserDto getDto(){
         UserDto userDto = new UserDto();
 
@@ -44,6 +49,7 @@ public class User {
         userDto.setName(name);
         userDto.setLastName(lastName);
         userDto.setEmail(email);
+        userDto.setTasks(tasks.stream().map(Task::getDto).collect(Collectors.toList()));
 
         return userDto;
     }

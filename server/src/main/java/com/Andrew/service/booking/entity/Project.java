@@ -1,7 +1,7 @@
 package com.Andrew.service.booking.entity;
 
-import com.Andrew.service.booking.dto.DashboardDto;
-import com.Andrew.service.booking.dto.ProjectDto;
+import com.Andrew.service.booking.dto.projectdtos.DashboardDto;
+import com.Andrew.service.booking.dto.projectdtos.ProjectDto;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -24,7 +24,9 @@ public class Project {
 
     private String description;
 
-    private LocalDateTime addedTime;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
 
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -39,8 +41,8 @@ public class Project {
         DashboardDto.setId(id);
         DashboardDto.setProjectName(projectName);
         DashboardDto.setClientName(clientName);
-        DashboardDto.setAddedTime(addedTime);
-        DashboardDto.setTasks(tasks.stream().map(Task::getDto).collect(Collectors.toList()));
+        DashboardDto.setCreatedAt(createdAt);
+        DashboardDto.setUpdatedAt(updatedAt);
         DashboardDto.setUsers(users.stream().map(User::getDto).collect(Collectors.toList()));
 
         return DashboardDto;
@@ -54,4 +56,7 @@ public class Project {
 
         return projectDto;
     }
+
+
+
 }

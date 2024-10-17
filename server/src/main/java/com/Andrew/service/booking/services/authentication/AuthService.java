@@ -1,7 +1,7 @@
 package com.Andrew.service.booking.services.authentication;
 
-import com.Andrew.service.booking.dto.SignupRequestDTO;
-import com.Andrew.service.booking.dto.UserDto;
+import com.Andrew.service.booking.dto.authDtos.SignupRequestDTO;
+import com.Andrew.service.booking.dto.userDtos.UserDto;
 
 public interface AuthService {
     UserDto signupClient(SignupRequestDTO signupRequestDTO);
