@@ -12,9 +12,7 @@ public class DashboardDto {
 
     private String projectName;
     private String clientName;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-
+    private LocalDateTime addedTime;
 
     private String details;
 
