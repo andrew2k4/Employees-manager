@@ -23,8 +23,7 @@ public class ManagerController {
 
     @PostMapping("/project/{userId}")
    public ResponseEntity<?> postProject(@PathVariable long userId, @RequestBody DashboardDto projectDto){
-        System.out.println( projectDto);
-        System.out.println( userId);
+
 
        boolean success = managerService.postProject(userId, projectDto);
         System.out.println( "2");
@@ -44,7 +43,7 @@ public class ManagerController {
         return ResponseEntity.ok(managerService.getAllProject());
     }
 
-    @GetMapping({"/dashboard"})
+    @GetMapping({"/projects/dashboard"})
     public ResponseEntity<?> getDashboard(){
         return ResponseEntity.ok(managerService.getDashboard());
     }
@@ -80,12 +79,19 @@ public class ManagerController {
 
     @GetMapping({"/task/{id}"})
     public ResponseEntity<TaskDto> getTaskById(@PathVariable long id) {
+        boolean a = managerService.getUserDashboardDto();
         TaskDto taskDto = managerService.getTaskById(id);
         if (taskDto != null) {
             return ResponseEntity.ok(taskDto);
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+
+    @GetMapping({"/employee/dashboard"})
+    public ResponseEntity<?> getUserDashboard(){
+        return ResponseEntity.ok(managerService.getUserDashboardDto());
     }
 
 

@@ -6,9 +6,12 @@ import com.Andrew.service.booking.Repository.UserRepository;
 import com.Andrew.service.booking.dto.projectdtos.DashboardDto;
 import com.Andrew.service.booking.dto.projectdtos.ProjectDto;
 import com.Andrew.service.booking.dto.taskDtos.TaskDto;
+import com.Andrew.service.booking.dto.userDtos.UserDashboardDto;
 import com.Andrew.service.booking.entity.Project;
 import com.Andrew.service.booking.entity.Task;
 import com.Andrew.service.booking.entity.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -116,6 +119,32 @@ public class ManagerServiceImpl implements ManagerService {
 
         return optionalTask.map(Task::getDto).orElse(null);
     }
+
+
+    @Override
+    public boolean getUserDashboardDto() {
+        try {
+            List<User> users = userRepository.findUsersWithTasks(LocalDateTime.now().minusDays(1), LocalDateTime.now());
+            List<UserDashboardDto> dto =  users.stream()
+                    .map(user -> {
+                        List<TaskDto> tasks = user.getTasks().stream()
+                                .filter(t -> t.getAddedTime().isAfter(LocalDateTime.now().minusDays(1)) && t.getAddedTime().isBefore(LocalDateTime.now()))
+                                .map(Task::getDto)
+                                .collect(Collectors.toList());
+                        return new UserDashboardDto(user.getId(), user.getName(), tasks);
+                    })
+                    .toList();
+            System.out.println(dto);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace(); // Affiche l'erreur pour le débogage
+            throw new RuntimeException("Error fetching user dashboard data", e);
+        }
+    }
+
+
+
+
 
 
 
