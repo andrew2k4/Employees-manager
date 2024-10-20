@@ -22,6 +22,6 @@ public interface ManagerService {
       List<TaskDto> getAllTasks();
 
 
-      boolean getUserDashboardDto();
-
+      List<UserDashboardDto> getUserDashboardDto();
+      List<UserDashboardDto> getUserDashboardFilteredDto(String startDate, String endDate);
 }

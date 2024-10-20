@@ -3,6 +3,7 @@ package com.Andrew.service.booking.controller;
 import com.Andrew.service.booking.Repository.TaskRepository;
 import com.Andrew.service.booking.dto.projectdtos.DashboardDto;
 import com.Andrew.service.booking.dto.taskDtos.TaskDto;
+import com.Andrew.service.booking.dto.userDtos.UserDashboardDto;
 import com.Andrew.service.booking.services.Manager.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,7 +80,6 @@ public class ManagerController {
 
     @GetMapping({"/task/{id}"})
     public ResponseEntity<TaskDto> getTaskById(@PathVariable long id) {
-        boolean a = managerService.getUserDashboardDto();
         TaskDto taskDto = managerService.getTaskById(id);
         if (taskDto != null) {
             return ResponseEntity.ok(taskDto);
@@ -91,7 +91,14 @@ public class ManagerController {
 
     @GetMapping({"/employee/dashboard"})
     public ResponseEntity<?> getUserDashboard(){
-        return ResponseEntity.ok(managerService.getUserDashboardDto());
+        List<UserDashboardDto> userDashboardDtos = managerService.getUserDashboardDto();
+        return ResponseEntity.ok(userDashboardDtos);
+    }
+
+    @GetMapping({"/employee/dashboard/{startDate}/{endDate}"})
+    public ResponseEntity<?> getUserDashboardFiltered(@PathVariable String startDate, @PathVariable String endDate){
+
+        return ResponseEntity.ok(managerService.getUserDashboardFilteredDto(startDate,endDate));
     }
 
 

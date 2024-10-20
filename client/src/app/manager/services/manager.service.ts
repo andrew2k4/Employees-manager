@@ -37,11 +37,17 @@ export class ManagerService {
     });
   }
 
+  getUserDashboard(): Observable<any> {
+    return this.http.get(`${Basic_Url}api/manager/employee/dashboard`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   createAuthorizationHeader(): HttpHeaders {
-    const token = UserStorageService.getToken(); // Récupérer le token
+    const token = UserStorageService.getToken();
     return new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Ajouter le token dans le header d'autorisation
-      'Content-Type': 'application/json', // Préciser que le corps est du JSON
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
   }
 }

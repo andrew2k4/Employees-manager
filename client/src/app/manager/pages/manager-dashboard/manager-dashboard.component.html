@@ -14,5 +14,45 @@
   >
   </project-dashboard>
 
-  <ng-template #employeeDashboard> </ng-template>
+  <ng-template #employeeDashboard>
+    <h1 class="title text-center mb-5">Beschäftige dashboard</h1>
+
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <mat-select
+        [(value)]="selected"
+        (selectionChange)="onChangeFilter(selected)"
+      >
+        <mat-option [value]="0">Alle</mat-option>
+        <mat-option [value]="1">Diese Woche</mat-option>
+        <mat-option [value]="2">Diese Monat</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <table class="m-auto">
+      <tHead>
+        <th>Beschäftige</th>
+        <th>Aufgabe</th>
+        <th>Stunde</th>
+      </tHead>
+      <tbody>
+        @for (user of filteredUserDashboard; track user) {
+        <tr>
+          <td>
+            {{ user.name }}
+          </td>
+
+          <td>
+            @for (tasks of user.tasks; track $index) {
+            <p>{{ tasks.description }}</p>
+            }
+          </td>
+          <td>
+            {{ user.workHours }}
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </ng-template>
 </main>

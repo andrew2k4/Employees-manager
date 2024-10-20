@@ -16,7 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -121,11 +124,19 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
 
+
     @Override
-    public boolean getUserDashboardDto() {
+    public List<UserDashboardDto> getUserDashboardDto(){
+        return userRepository.findAll().stream().map(User::getDashboardDto).toList();
+    }
+
+
+
+    @Override
+    public List<UserDashboardDto> getUserDashboardFilteredDto(String startDate, String endDate) {
         try {
-            List<User> users = userRepository.findUsersWithTasks(LocalDateTime.now().minusDays(1), LocalDateTime.now());
-            List<UserDashboardDto> dto =  users.stream()
+            List<User> users = userRepository.findUsersWithTasks(LocalDateTime.parse(startDate), LocalDateTime.parse(endDate));
+            List<UserDashboardDto> userDashboardDtos =  users.stream()
                     .map(user -> {
                         List<TaskDto> tasks = user.getTasks().stream()
                                 .filter(t -> t.getAddedTime().isAfter(LocalDateTime.now().minusDays(1)) && t.getAddedTime().isBefore(LocalDateTime.now()))
@@ -134,8 +145,7 @@ public class ManagerServiceImpl implements ManagerService {
                         return new UserDashboardDto(user.getId(), user.getName(), tasks);
                     })
                     .toList();
-            System.out.println(dto);
-            return true;
+            return userDashboardDtos;
         } catch (Exception e) {
             e.printStackTrace(); // Affiche l'erreur pour le débogage
             throw new RuntimeException("Error fetching user dashboard data", e);
