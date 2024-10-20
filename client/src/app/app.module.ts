@@ -18,7 +18,8 @@ import { RegisterComponent } from './basic/component/register/register.component
 import { SignupEmployeeComponent } from './basic/component/signup-employee/signup-employee.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { ProjectDashboardComponent } from './basic/component/projectDashboard/project-dashboard/project-dashboard.component';
+import { ProjectDashboardComponent } from './basic/component/project-dashboard/project-dashboard.component';
+import { FilterDashboardComponent } from './basic/component/filter-dashboard/filter-dashboard.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -28,6 +29,7 @@ registerLocaleData(en);
     SignupManagerComponent,
     RegisterComponent,
     SignupEmployeeComponent,
+    FilterDashboardComponent,
   ],
   imports: [
     BrowserModule,
