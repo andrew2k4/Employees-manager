@@ -32,7 +32,7 @@ export class ManagerService {
   }
 
   getAllProjects(): Observable<any> {
-    return this.http.get(`${Basic_Url}api/manager/dashboard`, {
+    return this.http.get(`${Basic_Url}api/manager/projects/dashboard`, {
       headers: this.createAuthorizationHeader(),
     });
   }
