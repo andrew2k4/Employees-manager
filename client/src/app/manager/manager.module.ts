@@ -6,6 +6,7 @@ import { ManagerComponent } from './manager.component';
 import { ManagerDashboardComponent } from './pages/manager-dashboard/manager-dashboard.component';
 import { CreateProjectComponent } from './pages/create-project/create-project.component';
 import { AllProjectsComponent } from './pages/all-projects/all-projects.component';
+import { ProjectDashboardComponent } from '../basic/component/projectDashboard/project-dashboard/project-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { AllProjectsComponent } from './pages/all-projects/all-projects.componen
     ManagerDashboardComponent,
     CreateProjectComponent,
     AllProjectsComponent,
+    ProjectDashboardComponent,
   ],
   imports: [CommonModule, ManagerRoutingModule, ReactiveFormsModule],
 })

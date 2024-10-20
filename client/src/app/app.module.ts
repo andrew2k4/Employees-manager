@@ -18,6 +18,7 @@ import { RegisterComponent } from './basic/component/register/register.component
 import { SignupEmployeeComponent } from './basic/component/signup-employee/signup-employee.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { ProjectDashboardComponent } from './basic/component/projectDashboard/project-dashboard/project-dashboard.component';
 registerLocaleData(en);
 
 @NgModule({

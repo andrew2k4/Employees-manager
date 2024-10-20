@@ -7,55 +7,12 @@
     Employee dashboard
   </button>
 
-  <div
+  <project-dashboard
+    [projects]="projects"
     *ngIf="isProjectDashboardActive === true; else employeeDashboard"
     #projectDashboard
   >
-    <h1 class="title text-center mb-5">Projekt dashboard</h1>
-    <table class="m-auto">
-      <thead>
-        <tr>
-          <th>Projekte</th>
-          <th>datum</th>
-          <th>Kunde</th>
-          <th>Beschäftigte</th>
-          <th>Arbeitzeit</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (project of projects; track project; let index = $index) {
-        <tr>
-          <td>{{ project.projectName }}</td>
-          <td>{{ project.createdAt | date : "dd/MM/yyyy" }}</td>
-          <td>{{ project.clientName }}</td>
-
-          <td>
-            @for (user of project.users; track $index) {
-            <tr scope="row">
-              {{
-                user.name
-              }}
-            </tr>
-            <div style="width: 100%; height: 1px; background-color: #000"></div>
-
-            }
-          </td>
-
-          <td>
-            @for (user of project.users; track $index) {
-            <tr>
-              {{
-                user.workHours
-              }}
-            </tr>
-
-            }
-          </td>
-        </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+  </project-dashboard>
 
   <ng-template #employeeDashboard> </ng-template>
 </main>
