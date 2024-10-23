@@ -153,6 +153,12 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
 
+    public UserDashboardDto getUserById(long id){
+        Optional<User> optionalUser= userRepository.findById(id);
+        return optionalUser.map(User::getDashboardDto).orElse(null);
+    }
+
+
 
 
 
