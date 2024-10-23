@@ -19,7 +19,7 @@ public class DashboardDto {
     private LocalDateTime updatedAt;
 
 
-    private String details;
+    private String description;
 
     private List<UserDto> users;
 

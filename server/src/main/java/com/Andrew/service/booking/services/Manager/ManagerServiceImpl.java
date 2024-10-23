@@ -4,6 +4,7 @@ import com.Andrew.service.booking.Repository.ProjectRepository;
 import com.Andrew.service.booking.Repository.TaskRepository;
 import com.Andrew.service.booking.Repository.UserRepository;
 import com.Andrew.service.booking.dto.projectdtos.DashboardDto;
+import com.Andrew.service.booking.dto.projectdtos.ProjectDetailsDto;
 import com.Andrew.service.booking.dto.projectdtos.ProjectDto;
 import com.Andrew.service.booking.dto.taskDtos.TaskDto;
 import com.Andrew.service.booking.dto.userDtos.UserDashboardDto;
@@ -45,7 +46,7 @@ public class ManagerServiceImpl implements ManagerService {
 
             project.setProjectName(DashboardDto.getProjectName());
             project.setClientName(DashboardDto.getClientName());
-            project.setDescription(DashboardDto.getDetails());
+            project.setDescription(DashboardDto.getDescription());
             project.setCreatedAt(LocalDateTime.now());
             project.setUpdatedAt(LocalDateTime.now());
 
@@ -67,7 +68,43 @@ public class ManagerServiceImpl implements ManagerService {
     public List<ProjectDto> getAllProject(){
         return projectRepository.findAll().stream().map(Project::getProjectDto).collect(Collectors.toList());
     }
-    
+
+    @Override
+    public boolean updateProjectById(long projectId, ProjectDetailsDto projectDetailsDto) {
+        Optional<Project> optionalProject = projectRepository.findById(projectId);
+
+        if (optionalProject.isPresent()) {
+            Project project = optionalProject.get();
+
+            boolean isUpdated = false;
+
+            // Update fields if they are different
+            if (!project.getProjectName().equals(projectDetailsDto.getProjectName())) {
+                project.setProjectName(projectDetailsDto.getProjectName());
+                isUpdated = true;
+            }
+
+            if (!project.getClientName().equals(projectDetailsDto.getClientName())) {
+                project.setClientName(projectDetailsDto.getClientName());
+                isUpdated = true;
+            }
+
+            if (!project.getDescription().equals(projectDetailsDto.getDescription())) {
+                project.setDescription(projectDetailsDto.getDescription());
+                isUpdated = true;
+            }
+
+            // Only save if there are updates
+            if (isUpdated) {
+                projectRepository.save(project);
+            }
+
+            return isUpdated;
+        }
+
+        return false;
+    }
+
 
 
     @Override
@@ -75,6 +112,20 @@ public class ManagerServiceImpl implements ManagerService {
         Optional<Project> optionalProject = projectRepository.findById(projectId);
 
         return optionalProject.map(Project::getDto).orElse(null);
+    }
+
+    @Override
+    public boolean deleteProjectById(long projectId) {
+        // Vérifier si le projet existe
+        Optional<Project> optionalProject = projectRepository.findById(projectId);
+
+        if (optionalProject.isPresent()) {
+            // Supprimer le projet et toutes les tâches associées
+            projectRepository.deleteById(projectId);
+            return true;  // Suppression réussie
+        }
+
+        return false; // Projet non trouvé
     }
 
 
@@ -118,7 +169,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public TaskDto getTaskById(long taskId) {
-        Optional<Task> optionalTask = taskRepository.findById((int) taskId);
+        Optional<Task> optionalTask = taskRepository.findById(taskId);
 
         return optionalTask.map(Task::getDto).orElse(null);
     }
@@ -152,11 +203,60 @@ public class ManagerServiceImpl implements ManagerService {
         }
     }
 
-
+    @Override
     public UserDashboardDto getUserById(long id){
         Optional<User> optionalUser= userRepository.findById(id);
         return optionalUser.map(User::getDashboardDto).orElse(null);
     }
+
+
+    @Override
+    public boolean updateTask(long taskId, TaskDto taskDto) {
+        Optional<Task> optionalTask = taskRepository.findById(taskId);
+
+        if (optionalTask.isPresent()) {
+            Task task = optionalTask.get();
+
+            boolean isUpdated = false;
+
+            // Vérifier les changements et mettre à jour les champs
+            if (!task.getDescription().equals(taskDto.getDescription())) {
+                task.setDescription(taskDto.getDescription());
+                isUpdated = true;
+            }
+
+            if (task.getHours() != taskDto.getHours()) {
+                task.setHours(taskDto.getHours());
+                isUpdated = true;
+            }
+
+            if (taskDto.getAddedTime() != null && !task.getAddedTime().equals(taskDto.getAddedTime())) {
+                task.setAddedTime(taskDto.getAddedTime());
+                isUpdated = true;
+            }
+
+
+            if (isUpdated) {
+                taskRepository.save(task);
+            }
+
+            return isUpdated;
+        }
+
+        return false;
+    }
+    @Override
+    public boolean deleteTaskById(long taskId) {
+        Optional<Task> optionalTask = taskRepository.findById(taskId);
+
+        if (optionalTask.isPresent()) {
+            taskRepository.deleteById(taskId);
+            return true;
+        }
+
+        return false; // La tâche n'existe pas
+    }
+
 
 
 

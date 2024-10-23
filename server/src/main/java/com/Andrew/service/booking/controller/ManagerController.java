@@ -2,6 +2,8 @@ package com.Andrew.service.booking.controller;
 
 import com.Andrew.service.booking.Repository.TaskRepository;
 import com.Andrew.service.booking.dto.projectdtos.DashboardDto;
+import com.Andrew.service.booking.dto.projectdtos.ProjectDetailsDto;
+import com.Andrew.service.booking.dto.projectdtos.ProjectDto;
 import com.Andrew.service.booking.dto.taskDtos.TaskDto;
 import com.Andrew.service.booking.dto.userDtos.UserDashboardDto;
 import com.Andrew.service.booking.services.Manager.ManagerService;
@@ -95,13 +97,54 @@ public class ManagerController {
         return ResponseEntity.ok(userDashboardDtos);
     }
 
-    @GetMapping({"/employee/dashboard/{startDate}/{endDate}"})
+    @GetMapping({"/dashboard/{startDate}/{endDate}"})
     public ResponseEntity<?> getUserDashboardFiltered(@PathVariable String startDate, @PathVariable String endDate){
 
         return ResponseEntity.ok(managerService.getUserDashboardFilteredDto(startDate,endDate));
     }
 
 
+    @PutMapping({"/project/{projectId}"})
+    public ResponseEntity<?> UpdateProjectById(@PathVariable long projectId, @RequestBody ProjectDetailsDto projectDto){
+        boolean isUpdate = managerService.updateProjectById(projectId, projectDto);
+        if (!isUpdate){
+         return   ResponseEntity.badRequest().build();
+        }
+       return ResponseEntity.accepted().build();
+    }
+
+    @DeleteMapping({"/project/{projectId}"})
+    public ResponseEntity<?>  deleteProjectById(@PathVariable long projectId){
+
+        boolean isDelete = managerService.deleteProjectById(projectId);
+
+        if (!isDelete){
+            return ResponseEntity.badRequest().build();
+        }
+
+        return ResponseEntity.accepted().build();
+    }
+
+
+    @PutMapping("/task/{taskId}")
+    public ResponseEntity<?> updateTask(@PathVariable long taskId, @RequestBody TaskDto taskDto) {
+        boolean isUpdate =  managerService.updateTask(taskId, taskDto);
+
+        if(!isUpdate){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.accepted().build();
+    }
+
+    @DeleteMapping({"/task/{taskId}"})
+    public ResponseEntity<?> deleteTask(@PathVariable long taskId, @RequestBody TaskDto taskDto) {
+        boolean isDelete =  managerService.deleteTaskById(taskId);
+
+        if(!isDelete){
+            return ResponseEntity.badRequest().build();
+        }
+        return ResponseEntity.accepted().build();
+    }
 
 
 }
