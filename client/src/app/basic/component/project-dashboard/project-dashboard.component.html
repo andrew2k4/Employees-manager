@@ -13,7 +13,11 @@
   <tbody>
     @for (project of projects; track project; let index = $index) {
     <tr>
-      <td>{{ project.projectName }}</td>
+      <td>
+        <a [routerLink]="['/manager/project', project.id]">{{
+          project.projectName
+        }}</a>
+      </td>
       <td>{{ project.createdAt | date : "dd/MM/yyyy" }}</td>
       <td>{{ project.clientName }}</td>
 

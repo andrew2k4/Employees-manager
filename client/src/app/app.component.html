@@ -45,6 +45,14 @@
     class="container d-flex justify-content-between align-items-center"
     *ngIf="isEmployeeLoggedIn && !isManagerLoggedIn"
   >
+    <a class="login-button" href="/employee/dashboard">
+      <mat-icon class="icon-display">dashboard</mat-icon>
+      Dashboard
+    </a>
+    <a class="login-button" href="/employee/task">
+      <mat-icon class="icon-display">create</mat-icon>
+      Aufgabe hinzufügen
+    </a>
     <h2 class="m-0">Sommermetallwerkstadt - Employee</h2>
     <a class="logout-button" href="/logout" (click)="logout()">
       <mat-icon class="icon-display">logout</mat-icon>

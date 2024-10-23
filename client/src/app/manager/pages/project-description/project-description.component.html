@@ -1,0 +1,40 @@
+<main class="text-center">
+  <h1>{{ project.projectName }}</h1>
+  <div class="project-info d-flex justify-space-around">
+    <h2 class="small-heading">
+      Kunde:
+      <span class="font-weight-bold">{{ project.clientName }}</span>
+    </h2>
+    <h2 class="small-heading">
+      Arbeitzeit:
+      <span class="font-weight-bold">{{ project.workHours }}</span> Stunde
+    </h2>
+  </div>
+  <h3>Beschreibung:</h3>
+  <p>{{ project.details }}</p>
+
+  <table class="mt-5 m-auto">
+    <thead>
+      <tr>
+        <th>Mitarbeiter</th>
+        <th>Aufgabe</th>
+        <th>Stunde</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (user of project.users; track user) {
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>
+          @for (task of user.tasks; track task) {
+          <p>{{ task.description }}</p>
+          }
+        </td>
+        <td>
+          {{ user.workHours }}
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</main>

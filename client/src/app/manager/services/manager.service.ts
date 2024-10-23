@@ -37,6 +37,12 @@ export class ManagerService {
     });
   }
 
+  getProjectById(id): Observable<any> {
+    return this.http.get(`${Basic_Url}api/manager/project/${id}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   getUserDashboard(): Observable<any> {
     return this.http.get(`${Basic_Url}api/manager/employee/dashboard`, {
       headers: this.createAuthorizationHeader(),

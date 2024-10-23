@@ -9,6 +9,7 @@ import { AllProjectsComponent } from './pages/all-projects/all-projects.componen
 import { ProjectDashboardComponent } from '../basic/component/project-dashboard/project-dashboard.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ProjectDescriptionComponent } from './pages/project-description/project-description.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     CreateProjectComponent,
     AllProjectsComponent,
     ProjectDashboardComponent,
+    ProjectDescriptionComponent,
   ],
   imports: [
     MatFormFieldModule,
