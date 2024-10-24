@@ -49,6 +49,12 @@ export class ManagerService {
     });
   }
 
+  deleteProject(projectId: number): Observable<any> {
+    return this.http.delete(`${Basic_Url}api/manager/project/${projectId}`, {
+      headers: this.createAuthorizationHeader(),
+    });
+  }
+
   createAuthorizationHeader(): HttpHeaders {
     const token = UserStorageService.getToken();
     return new HttpHeaders({

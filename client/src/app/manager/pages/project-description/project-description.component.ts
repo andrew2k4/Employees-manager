@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ManagerService } from '../../services/manager.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-description',
@@ -12,7 +12,8 @@ export class ProjectDescriptionComponent implements OnInit {
 
   constructor(
     private managerService: ManagerService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +40,12 @@ export class ProjectDescriptionComponent implements OnInit {
             console.log(res);
           });
       }
+    });
+  }
+
+  onDeleteProject() {
+    this.managerService.deleteProject(this.project.id).subscribe((res) => {
+      this.router.navigateByUrl('/manager/dashboard');
     });
   }
 }
