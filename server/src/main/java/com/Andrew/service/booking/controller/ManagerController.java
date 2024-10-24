@@ -115,7 +115,6 @@ public class ManagerController {
 
     @DeleteMapping({"/project/{projectId}"})
     public ResponseEntity<?>  deleteProjectById(@PathVariable long projectId){
-
         boolean isDelete = managerService.deleteProjectById(projectId);
 
         if (!isDelete){
@@ -146,5 +145,7 @@ public class ManagerController {
         return ResponseEntity.accepted().build();
     }
 
+
+    @GetMapping("")
 
 }

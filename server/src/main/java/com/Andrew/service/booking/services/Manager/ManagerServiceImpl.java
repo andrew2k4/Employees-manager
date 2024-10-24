@@ -79,17 +79,17 @@ public class ManagerServiceImpl implements ManagerService {
             boolean isUpdated = false;
 
             // Update fields if they are different
-            if (!project.getProjectName().equals(projectDetailsDto.getProjectName())) {
+            if ( project.getProjectName() != null && !project.getProjectName().equals(projectDetailsDto.getProjectName())) {
                 project.setProjectName(projectDetailsDto.getProjectName());
                 isUpdated = true;
             }
 
-            if (!project.getClientName().equals(projectDetailsDto.getClientName())) {
+            if (project.getClientName()!= null && !project.getClientName().equals(projectDetailsDto.getClientName())) {
                 project.setClientName(projectDetailsDto.getClientName());
                 isUpdated = true;
             }
 
-            if (!project.getDescription().equals(projectDetailsDto.getDescription())) {
+            if (project.getDescription()!=null && !project.getDescription().equals(projectDetailsDto.getDescription())) {
                 project.setDescription(projectDetailsDto.getDescription());
                 isUpdated = true;
             }
@@ -116,16 +116,17 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public boolean deleteProjectById(long projectId) {
-        // Vérifier si le projet existe
         Optional<Project> optionalProject = projectRepository.findById(projectId);
-
         if (optionalProject.isPresent()) {
-            // Supprimer le projet et toutes les tâches associées
+            optionalProject.get().getUsers().forEach(user -> {
+                user.getProjects().remove(optionalProject.get());  // Remove the project from each user's project list
+                userRepository.save(user);
+                });
             projectRepository.deleteById(projectId);
-            return true;  // Suppression réussie
+            return true;
         }
 
-        return false; // Projet non trouvé
+        return false;
     }
 
 
@@ -220,7 +221,7 @@ public class ManagerServiceImpl implements ManagerService {
             boolean isUpdated = false;
 
             // Vérifier les changements et mettre à jour les champs
-            if (!task.getDescription().equals(taskDto.getDescription())) {
+            if (task.getDescription() != null && task.getDescription().equals(taskDto.getDescription())){
                 task.setDescription(taskDto.getDescription());
                 isUpdated = true;
             }

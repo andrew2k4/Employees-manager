@@ -35,7 +35,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @ManyToMany
+    @ManyToMany()
     @JoinTable(
             name = "user_projects", // Join table name
             joinColumns = @JoinColumn(name = "user_id"),

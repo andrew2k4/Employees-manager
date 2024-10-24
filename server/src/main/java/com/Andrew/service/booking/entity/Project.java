@@ -32,7 +32,7 @@ public class Project {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Task> tasks = new ArrayList<Task>();
 
-    @ManyToMany(mappedBy = "projects") // Inverse relationship in Project
+    @ManyToMany(mappedBy = "projects",cascade = CascadeType.DETACH) // Inverse relationship in Project
     private List<User> users = new ArrayList<>();
 
     public DashboardDto getDto(){
