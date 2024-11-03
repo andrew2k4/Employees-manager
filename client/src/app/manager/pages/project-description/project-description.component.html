@@ -1,45 +1,48 @@
-<main class="text-center">
+<main class="project-container text-center">
   <h1>{{ project.projectName }}</h1>
+
   <div class="project-info d-flex justify-space-around">
     <h2 class="small-heading">
       Kunde:
       <span class="font-weight-bold">{{ project.clientName }}</span>
     </h2>
     <h2 class="small-heading">
-      Arbeitzeit:
-      <span class="font-weight-bold">{{ project.workHours }}</span> Stunde
+      Arbeitszeit:
+      <span class="font-weight-bold">{{ project.workHours }}</span> Stunden
     </h2>
   </div>
 
-  <div>
-    <button class="" (click)="onDeleteProject()">Löschen</button>
+  <div class="action-buttons mt-4">
+    <p-button (click)="onDeleteProject()" severity="danger" label="Löschen"
+      ><mat-icon class="icon-display">delete</mat-icon></p-button
+    >
+
+    <p-button (click)="navigateToUpdate()" severity="warning" label="Bearbeiten"
+      ><mat-icon class="icon-display">edit</mat-icon></p-button
+    >
   </div>
 
-  <h3>Beschreibung:</h3>
-  <p>{{ project.details }}</p>
+  <h3 class="description-heading mt-5">Beschreibung:</h3>
+  <p class="description-text">{{ project.details }}</p>
 
-  <table class="mt-5 m-auto">
+  <table class="project-table mt-5">
     <thead>
       <tr>
         <th>Mitarbeiter</th>
         <th>Aufgabe</th>
-        <th>Stunde</th>
+        <th>Stunden</th>
       </tr>
     </thead>
     <tbody>
-      @for (user of project.users; track user) {
-      <tr>
+      <tr *ngFor="let user of project.users">
         <td>{{ user.name }}</td>
         <td>
-          @for (task of user.tasks; track task) {
-          <p>{{ task.description }}</p>
-          }
+          <ul>
+            <li *ngFor="let task of user.tasks">{{ task.description }}</li>
+          </ul>
         </td>
-        <td>
-          {{ user.workHours }}
-        </td>
+        <td>{{ user.workHours }}</td>
       </tr>
-      }
     </tbody>
   </table>
 </main>

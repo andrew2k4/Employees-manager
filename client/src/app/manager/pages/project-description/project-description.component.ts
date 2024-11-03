@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ManagerService } from '../../services/manager.service';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
@@ -6,6 +6,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
   selector: 'app-project-description',
   templateUrl: './project-description.component.html',
   styleUrl: './project-description.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProjectDescriptionComponent implements OnInit {
   project: any = {};
@@ -47,5 +48,10 @@ export class ProjectDescriptionComponent implements OnInit {
     this.managerService.deleteProject(this.project.id).subscribe((res) => {
       this.router.navigateByUrl('/manager/dashboard');
     });
+  }
+
+  navigateToUpdate() {
+    this.managerService.projectToUpdate = this.project;
+    this.router.navigate(['/manager/projectt/update', this.project.id]);
   }
 }

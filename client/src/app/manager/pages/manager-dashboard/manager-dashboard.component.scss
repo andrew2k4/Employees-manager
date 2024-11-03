@@ -1,49 +1,87 @@
-table {
+/* Conteneur principal */
+.dashboard-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+/* Boutons pour basculer entre les tableaux de bord */
+.dashboard-toggle-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.toggle-button {
+  width: 200px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+  background-color: #0056b3;
+}
+
+/* Titre principal */
+.title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Champ de filtre */
+.filter-field {
+  width: 200px;
+  margin: 20px auto;
+  display: block;
+}
+
+/* Table de données des employés */
+.employee-table {
+  width: 100%;
   border-collapse: collapse;
-  border: 2px solid rgb(140 140 140);
-  font-family: sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-caption {
-  caption-side: bottom;
-  padding: 10px;
-  font-weight: bold;
+.employee-table th,
+.employee-table td {
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 15px;
+  color: #555;
+  border-bottom: 1px solid #ddd;
 }
 
-thead,
-tfoot {
-  background-color: rgb(228 240 245);
+.employee-table th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: 600;
 }
 
-th,
-td {
-  border: 1px solid rgb(160 160 160);
-  padding: 8px 10px;
+.employee-table tr:nth-child(even) {
+  background-color: #f4f6f8;
 }
 
-td:last-of-type {
-  text-align: center;
+.employee-table td {
+  color: #333;
 }
 
-tbody > tr:nth-of-type(even) {
-  background-color: rgb(237 238 242);
-}
-
-tfoot th {
-  text-align: right;
-}
-
-tfoot td {
-  font-weight: bold;
-}
-
-row {
-  border: 1px solid black;
-}
-
-p {
-  padding: 0px;
-  margin: 0px;
+/* Liste des tâches */
+ul {
+  padding-left: 20px;
+  list-style-type: disc;
+  color: #333;
+  font-size: 14px;
 }

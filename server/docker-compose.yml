@@ -31,6 +31,14 @@ services:
       retries: 10
       interval: 3s
       timeout: 30s
+  client: 
+    build:
+      context: .
+      dockerfile: ../client/Dockerfile
+    ports:
+      - 4002:4002
+    networks:
+      - springboot-mysql-network
 volumes:
   mysql-data:
 networks:

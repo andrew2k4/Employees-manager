@@ -1,23 +1,39 @@
-<div>
+<div class="container">
   <h1 class="text-center">Projekt erstellen</h1>
   <form
-    class="d-flex flex-column m-auto w-50"
+    class="form-container"
     [formGroup]="validateForm"
     (ngSubmit)="postProject()"
   >
-    <label> Name </label>
+    <label for="projectName">Name</label>
     <input
-      placeholder="project name"
+      class="form-input"
+      type="text"
+      placeholder="Projektname"
       formControlName="projectName"
       id="projectName"
     />
 
-    <label> Client </label>
-    <input placeholder="client name" formControlName="client" id="clientName" />
+    <label for="clientName">Client</label>
+    <input
+      class="form-input"
+      type="text"
+      placeholder="Kundenname"
+      formControlName="client"
+      id="clientName"
+    />
 
-    <label> Details </label>
-    <input placeholder="details" formControlName="details" id="details" />
+    <label for="details">Details</label>
+    <textarea
+      class="form-textarea"
+      placeholder="Details"
+      formControlName="details"
+      id="details"
+    ></textarea>
 
-    <input class="mt-5" type="submit" name="create project" value="erstellen" />
+    <div class="submit-container">
+      <p-toast></p-toast>
+      <input class="submit-button" type="submit" value="Erstellen" />
+    </div>
   </form>
 </div>

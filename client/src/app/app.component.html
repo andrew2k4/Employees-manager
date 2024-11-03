@@ -1,63 +1,53 @@
-<nav class="navbar navbar-light bg-light p-6">
-  <div
-    class="container d-flex justify-content-between align-items-center"
-    *ngIf="!isEmployeeLoggedIn && !isManagerLoggedIn"
-  >
+<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+  <div class="container d-flex justify-content-between align-items-center">
     <h2 class="m-0">Sommermetallwerkstadt</h2>
-    <div class="gap-3 d-flex flex-row">
-      <a class="login-button" href="/register">
-        <mat-icon class="icon-display">login</mat-icon>
-        registrierung
-      </a>
-      <a class="login-button" href="/login">
-        <mat-icon class="icon-display">login</mat-icon>
-        Anmeldung
-      </a>
-    </div>
-  </div>
 
-  <div
-    class="container d-flex justify-content-between align-items-center"
-    *ngIf="isManagerLoggedIn"
-  >
-    <h2 class="m-0">Sommermetallwerkstadt - Manager</h2>
-    <div class="d-flex justify-content-between gap-2">
-      <a class="login-button" href="/manager/dashboard">
-        <mat-icon class="icon-display">dashboard</mat-icon>
-        Dashboard
-      </a>
-      <a class="login-button" href="/manager/project">
-        <mat-icon class="icon-display">create</mat-icon>
-        Projekt erstellen
-      </a>
-      <a class="login-button" href="/employee/task">
-        <mat-icon class="icon-display">create</mat-icon>
-        Aufgabe hinzufügen
-      </a>
-      <a class="login-button" href="/logout" (click)="logout()">
-        <mat-icon class="icon-display">logout</mat-icon>
-        Abmeldung
-      </a>
-    </div>
-  </div>
+    <div class="d-flex gap-3">
+      <ng-container *ngIf="!isEmployeeLoggedIn && !isManagerLoggedIn">
+        <a class="login-button" href="/register">
+          <mat-icon class="icon-display">login</mat-icon>
+          Registrierung
+        </a>
+        <a class="login-button" href="/login">
+          <mat-icon class="icon-display">login</mat-icon>
+          Anmeldung
+        </a>
+      </ng-container>
 
-  <div
-    class="container d-flex justify-content-between align-items-center"
-    *ngIf="isEmployeeLoggedIn && !isManagerLoggedIn"
-  >
-    <a class="login-button" href="/employee/dashboard">
-      <mat-icon class="icon-display">dashboard</mat-icon>
-      Dashboard
-    </a>
-    <a class="login-button" href="/employee/task">
-      <mat-icon class="icon-display">create</mat-icon>
-      Aufgabe hinzufügen
-    </a>
-    <h2 class="m-0">Sommermetallwerkstadt - Employee</h2>
-    <a class="logout-button" href="/logout" (click)="logout()">
-      <mat-icon class="icon-display">logout</mat-icon>
-      Abmeldung
-    </a>
+      <ng-container *ngIf="isManagerLoggedIn">
+        <a class="login-button" href="/manager/dashboard">
+          <mat-icon class="icon-display">dashboard</mat-icon>
+          Dashboard
+        </a>
+        <a class="login-button" href="/manager/project">
+          <mat-icon class="icon-display">create</mat-icon>
+          Projekt erstellen
+        </a>
+        <a class="login-button" href="/employee/task">
+          <mat-icon class="icon-display">create</mat-icon>
+          Aufgabe hinzufügen
+        </a>
+        <a class="logout-button" href="/logout" (click)="logout()">
+          <mat-icon class="icon-display">logout</mat-icon>
+          Abmeldung
+        </a>
+      </ng-container>
+
+      <ng-container *ngIf="isEmployeeLoggedIn && !isManagerLoggedIn">
+        <a class="login-button" href="/employee/dashboard">
+          <mat-icon class="icon-display">dashboard</mat-icon>
+          Dashboard
+        </a>
+        <a class="login-button" href="/employee/task">
+          <mat-icon class="icon-display">create</mat-icon>
+          Aufgabe hinzufügen
+        </a>
+        <a class="logout-button" href="/logout" (click)="logout()">
+          <mat-icon class="icon-display">logout</mat-icon>
+          Abmeldung
+        </a>
+      </ng-container>
+    </div>
   </div>
 </nav>
 

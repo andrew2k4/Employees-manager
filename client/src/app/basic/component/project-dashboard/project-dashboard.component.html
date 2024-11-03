@@ -1,9 +1,10 @@
-<h1 class="title text-center mb-5">Projekt dashboard</h1>
-<table class="m-auto">
+<h1 class="title text-center mb-5">Projekt Dashboard</h1>
+
+<table class="project-table m-auto">
   <thead>
     <tr>
       <th>Projekte</th>
-      <th>datum</th>
+      <th>Datum</th>
       <th>Kunde</th>
       <th>Beschäftigte</th>
       <th>Arbeitzeit</th>
@@ -11,40 +12,25 @@
     </tr>
   </thead>
   <tbody>
-    @for (project of projects; track project; let index = $index) {
-    <tr>
+    <tr *ngFor="let project of projects; let i = index">
       <td>
-        <a [routerLink]="['/manager/project', project.id]">{{
-          project.projectName
-        }}</a>
+        <a [routerLink]="['/manager/project', project.id]">
+          {{ project.projectName }}
+        </a>
       </td>
       <td>{{ project.createdAt | date : "dd/MM/yyyy" }}</td>
       <td>{{ project.clientName }}</td>
-
       <td>
-        @for (user of project.users; track $index) {
-        <tr scope="row">
-          {{
-            user.name
-          }}
-        </tr>
-        <div style="width: 100%; height: 1px; background-color: #000"></div>
-
-        }
+        <ul>
+          <li *ngFor="let user of project.users">{{ user.name }}</li>
+        </ul>
       </td>
-
       <td>
-        @for (user of project.users; track $index) {
-        <tr>
-          {{
-            user.workHours
-          }}
-        </tr>
-
-        }
+        <ul>
+          <li *ngFor="let user of project.users">{{ user.workHours }}</li>
+        </ul>
       </td>
       <td>{{ project.workHours }}</td>
     </tr>
-    }
   </tbody>
 </table>

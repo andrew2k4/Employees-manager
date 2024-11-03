@@ -1,13 +1,13 @@
 <main>
   <h1 class="text-center">Aufgabe hinzufügen</h1>
   <form
-    class="d-flex flex-column w-50 m-auto"
+    class="form-container d-flex flex-column w-50 m-auto"
     [formGroup]="validateForm"
     (ngSubmit)="postProject()"
   >
     <!-- Dropdown pour sélectionner un projet -->
     <label for="project">Project</label>
-    <select formControlName="projectId" id="project">
+    <select formControlName="projectId" id="project" class="form-control">
       <option *ngFor="let project of projects" [value]="project.id">
         {{ project.projectName || "Unnamed Project" }}
       </option>
@@ -16,16 +16,24 @@
     <!-- Description du projet -->
     <label for="description">Description</label>
     <input
+      type="text"
       placeholder="Description"
       formControlName="description"
       id="description"
+      class="form-control"
     />
 
     <!-- Nombre d'heures -->
     <label for="hours">Hours</label>
-    <input placeholder="Enter hours" formControlName="hours" id="hours" />
+    <input
+      type="number"
+      placeholder="Enter hours"
+      formControlName="hours"
+      id="hours"
+      class="form-control"
+    />
 
     <!-- Bouton de soumission -->
-    <input class="mt-5" type="submit" name="create task" value="hinzufügen" />
+    <button class="btn btn-primary mt-4" type="submit">Hinzufügen</button>
   </form>
 </main>

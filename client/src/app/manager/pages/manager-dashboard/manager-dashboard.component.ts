@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { ManagerService } from '../../services/manager.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-manager-dashboard',
   templateUrl: './manager-dashboard.component.html',
   styleUrls: ['./manager-dashboard.component.scss'],
+  providers: [MessageService],
 })
 export class ManagerDashboardComponent {
   projects: any;
@@ -14,11 +16,24 @@ export class ManagerDashboardComponent {
 
   selected: number = 0;
 
-  constructor(private managerService: ManagerService) {}
+  constructor(
+    private managerService: ManagerService,
+    private messageService: MessageService
+  ) {}
 
   ngOnInit() {
     this.getProjectDashboard();
     this.getUserDashboard();
+    const toastMessage = history.state.toastMessage;
+    console.log(toastMessage);
+    if (toastMessage) {
+      const severity = 'success';
+      this.messageService.add({
+        severity,
+        summary: severity === 'success' ? 'Success' : 'Error',
+        detail: toastMessage,
+      });
+    }
   }
 
   getUserDashboard() {
@@ -62,19 +77,16 @@ export class ManagerDashboardComponent {
     }
   }
 
-  // Méthode pour afficher uniquement les utilisateurs ayant des heures de travail > 0
   filterUsersWithWorkHours() {
     this.filteredUserDashboard = this.filteredUserDashboard.filter(
       (user) => user.workHours > 0
     );
   }
 
-  // Filtrer les tâches en fonction de la période choisie
   onChangeFilter(event: number) {
     const today = new Date();
 
     if (event === 0) {
-      // Filtre 0 : Afficher toutes les tâches
       this.filteredUserDashboard = [...this.usersDashboard]; // Cloner le tableau pour éviter les références partagées
     } else if (event === 1) {
       // Filtre 1 : Afficher uniquement les tâches de la semaine courante (du lundi au dimanche)

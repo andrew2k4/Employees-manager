@@ -1,0 +1,21 @@
+<main>
+  <h1>Update Projekt</h1>
+
+  <form [formGroup]="validateForm" (ngSubmit)="onUpdate()">
+    <label for="projectName">Name</label>
+    <input type="text" formControlName="projectName" id="projectName" />
+
+    <label for="clientName">Kunde</label>
+    <input type="text" formControlName="clientName" id="clientName" />
+
+    <label for="description">Beschreibung</label>
+    <textarea
+      type="text"
+      class="last-input"
+      formControlName="description"
+      id="description"
+    ></textarea>
+
+    <button type="submit">Update</button>
+  </form>
+</main>

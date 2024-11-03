@@ -1,79 +1,128 @@
-table {
-  border-collapse: collapse;
-  border: 2px solid rgb(140 140 140);
-  font-family: sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
+/* Style global du conteneur */
+.project-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f4f6f8;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
 }
 
-caption {
-  caption-side: bottom;
-  padding: 10px;
-  font-weight: bold;
-}
-
-thead,
-tfoot {
-  background-color: rgb(228 240 245);
-}
-
-th,
-td {
-  border: 1px solid rgb(160 160 160);
-  padding: 8px 10px;
-}
-
-td:last-of-type {
-  text-align: center;
-}
-
-tbody > tr:nth-of-type(even) {
-  background-color: rgb(237 238 242);
-}
-
-tfoot th {
-  text-align: right;
-}
-
-tfoot td {
-  font-weight: bold;
-}
-
-row {
-  border: 1px solid black;
-}
-
-p {
-  padding: 0px;
-  margin: 0px;
-}
-
+/* Titre principal */
 h1 {
-  font-size: 2.5rem; /* Larger heading for the project name */
-  margin-bottom: 1rem;
+  font-size: 28px;
+  color: #343a40;
+  margin-bottom: 20px;
 }
 
+/* Informations du projet */
 .project-info {
   display: flex;
-  justify-content: space-around; /* Even space around each item */
-  align-items: center;
+  justify-content: space-around;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 .small-heading {
-  font-size: 1rem; /* Smaller size for the h2 elements */
-  font-weight: normal; /* Lighter weight for less emphasis */
-  margin: 0; /* Remove default margins for tighter spacing */
-}
-
-h3 {
-  margin-top: 2rem; /* Adds spacing before the description */
-}
-
-p {
-  font-size: 1.125rem; /* Slightly larger font for better readability */
-  line-height: 1.6; /* Improve text readability */
+  font-size: 18px;
+  color: #555;
 }
 
 .font-weight-bold {
   font-weight: bold;
+  color: #007bff;
+}
+
+/* Boutons d'action */
+.action-buttons p-button {
+  margin-right: 10px;
+}
+
+.action-buttons mat-icon {
+  margin-right: 5px;
+}
+
+p-button[severity="danger"] {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+p-button[severity="warning"] {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+p-button:hover {
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+/* Description */
+.description-heading {
+  font-size: 22px;
+  color: #343a40;
+  margin-bottom: 10px;
+}
+
+.description-text {
+  font-size: 16px;
+  color: #555;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Table de données */
+.project-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.project-table th,
+.project-table td {
+  padding: 12px 15px;
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+}
+
+.project-table th {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.project-table td {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.project-table tr:nth-child(even) td {
+  background-color: #f1f3f5;
+}
+
+/* Liste des tâches */
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #495057;
+  font-size: 14px;
+}
+
+/* Espacements */
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.mt-5 {
+  margin-top: 2rem;
+}
+
+.m-auto {
+  margin: auto;
 }

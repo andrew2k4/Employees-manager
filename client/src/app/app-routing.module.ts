@@ -6,12 +6,21 @@ import { RegisterComponent } from './basic/component/register/register.component
 import { SignupEmployeeComponent } from './basic/component/signup-employee/signup-employee.component';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   { path: 'register-employee', component: SignupEmployeeComponent },
   { path: 'register-manager', component: SignupManagerComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'employee', loadChildren: () => import('./employee/employee.module').then(m => m.EmployeeModule) },
-  { path: 'manager', loadChildren: () => import('./manager/manager.module').then(m => m.ManagerModule) },
+  {
+    path: 'employee',
+    loadChildren: () =>
+      import('./employee/employee.module').then((m) => m.EmployeeModule),
+  },
+  {
+    path: 'manager',
+    loadChildren: () =>
+      import('./manager/manager.module').then((m) => m.ManagerModule),
+  },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

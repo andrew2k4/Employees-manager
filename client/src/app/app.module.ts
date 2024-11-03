@@ -20,6 +20,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { ProjectDashboardComponent } from './basic/component/project-dashboard/project-dashboard.component';
 import { FilterDashboardComponent } from './basic/component/filter-dashboard/filter-dashboard.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastModule } from 'primeng/toast';
+import { RippleModule } from 'primeng/ripple';
 registerLocaleData(en);
 
 @NgModule({
@@ -32,6 +35,7 @@ registerLocaleData(en);
     FilterDashboardComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -40,6 +44,8 @@ registerLocaleData(en);
     MatIconModule,
     MatCardModule,
     MatInputModule,
+    ToastModule,
+    RippleModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

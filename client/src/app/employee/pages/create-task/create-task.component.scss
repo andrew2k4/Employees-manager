@@ -1,0 +1,54 @@
+/* Ajoutez ce CSS dans votre fichier de styles */
+body {
+  background-color: #f8f9fa; /* Couleur de fond douce */
+}
+
+h1 {
+  margin-bottom: 20px;
+  color: #343a40; /* Couleur du texte */
+  font-size: 2rem;
+}
+
+.form-container {
+  background: #ffffff; /* Fond blanc pour le formulaire */
+  padding: 20px; /* Espacement intérieur */
+  border-radius: 8px; /* Coins arrondis */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre pour le relief */
+}
+
+label {
+  margin-bottom: 5px; /* Espacement en dessous des labels */
+  font-weight: 600; /* Texte en gras pour les labels */
+}
+
+.form-control {
+  margin-bottom: 15px; /* Espacement entre les champs */
+  padding: 10px; /* Espacement intérieur */
+  border: 1px solid #ced4da; /* Bordure grise claire */
+  border-radius: 5px; /* Coins arrondis */
+  font-size: 1rem; /* Taille de la police */
+  transition: border-color 0.3s; /* Transition pour l'effet de focus */
+}
+
+.form-control:focus {
+  border-color: #007bff; /* Bordure bleue lors du focus */
+  outline: none; /* Supprime l'outline par défaut */
+}
+
+.btn {
+  padding: 10px 20px; /* Espacement intérieur pour le bouton */
+  font-size: 1rem; /* Taille de la police */
+  border: none; /* Pas de bordure */
+  border-radius: 5px; /* Coins arrondis pour le bouton */
+  cursor: pointer; /* Curseur pointer pour le bouton */
+}
+
+.btn-primary {
+  background-color: #007bff; /* Couleur de fond du bouton */
+  color: white; /* Couleur du texte du bouton */
+  transition: background-color 0.3s; /* Transition pour l'effet de hover */
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; /* Couleur de fond du bouton lors du hover */
+}

@@ -3,13 +3,15 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserStorageService } from '../../basic/services/storage/user-storage.service';
 
-const Basic_Url = 'http://localhost:8080/';
+const Basic_Url = 'http://localhost:8090/';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ManagerService {
   constructor(private http: HttpClient) {}
+
+  projectToUpdate: any;
 
   postProject(projectDto: any): Observable<any> {
     const userId = UserStorageService.getUserId();
@@ -61,5 +63,15 @@ export class ManagerService {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     });
+  }
+
+  updateProject(projectId, project: any): Observable<any> {
+    return this.http.put(
+      `${Basic_Url}api/manager/project/${projectId}`,
+      project,
+      {
+        headers: this.createAuthorizationHeader(),
+      }
+    );
   }
 }

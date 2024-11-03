@@ -1,23 +1,29 @@
-<main>
-  <div class="w-full d-flex"></div>
-  <button class="w-50" (click)="changeDashboard(true)">
-    Project Dashboard
-  </button>
-  <button class="w-50" (click)="changeDashboard(false)">
-    Employee dashboard
-  </button>
+<main class="dashboard-container">
+  <p-toast></p-toast>
 
+  <!-- Boutons pour basculer entre les tableaux de bord -->
+  <div class="dashboard-toggle-buttons">
+    <button class="toggle-button" (click)="changeDashboard(true)">
+      Project Dashboard
+    </button>
+    <button class="toggle-button" (click)="changeDashboard(false)">
+      Employee Dashboard
+    </button>
+  </div>
+
+  <!-- Projet Dashboard -->
   <project-dashboard
+    *ngIf="isProjectDashboardActive; else employeeDashboard"
     [projects]="projects"
-    *ngIf="isProjectDashboardActive === true; else employeeDashboard"
-    #projectDashboard
   >
   </project-dashboard>
 
+  <!-- Employee Dashboard -->
   <ng-template #employeeDashboard>
-    <h1 class="title text-center mb-5">Beschäftige dashboard</h1>
+    <h1 class="title text-center">Beschäftige Dashboard</h1>
 
-    <mat-form-field>
+    <!-- Filtre -->
+    <mat-form-field appearance="outline" class="filter-field">
       <mat-label>Filter</mat-label>
       <mat-select
         [(value)]="selected"
@@ -29,29 +35,25 @@
       </mat-select>
     </mat-form-field>
 
-    <table class="m-auto">
-      <tHead>
-        <th>Kollege</th>
-        <th>Aufgabe</th>
-        <th>Stunde</th>
-      </tHead>
-      <tbody>
-        @for (user of filteredUserDashboard; track user) {
+    <!-- Tableau des données des employés -->
+    <table class="employee-table">
+      <thead>
         <tr>
-          <td>
-            {{ user.name }}
-          </td>
-
-          <td>
-            @for (tasks of user.tasks; track $index) {
-            <p>{{ tasks.description }}</p>
-            }
-          </td>
-          <td>
-            {{ user.workHours }}
-          </td>
+          <th>Kollege</th>
+          <th>Aufgabe</th>
+          <th>Stunde</th>
         </tr>
-        }
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of filteredUserDashboard">
+          <td>{{ user.name }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let task of user.tasks">{{ task.description }}</li>
+            </ul>
+          </td>
+          <td>{{ user.workHours }}</td>
+        </tr>
       </tbody>
     </table>
   </ng-template>
