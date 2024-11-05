@@ -41,6 +41,7 @@ public class Project {
         DashboardDto.setId(id);
         DashboardDto.setProjectName(projectName);
         DashboardDto.setClientName(clientName);
+        DashboardDto.setDescription(description);
         DashboardDto.setCreatedAt(createdAt);
         DashboardDto.setUpdatedAt(updatedAt);
         DashboardDto.setUsers(users.stream().map(User::getDto).collect(Collectors.toList()));
