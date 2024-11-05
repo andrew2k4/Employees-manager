@@ -1,34 +1,71 @@
-<div class="w-50 mx-auto mt-10 parent">
-  <div class="text-black parent al">
-    <div class="child">
-      <h2 style="margin-left: 55px">Manager Sign-up</h2>
-    </div>
-    <form
-      class="d-flex flex-column gap-3"
-      [formGroup]="validateForm"
-      (ngSubmit)="submitForm()"
-    >
-      <label>Email:</label>
-      <input placeholder="email" formControlName="email" id="email" />
-      <label>Name:</label>
-      <input placeholder="name" formControlName="name" id="name" />
-      <label>address:</label>
-      <input placeholder="address" formControlName="address" id="address" />
-      <label>password:</label>
+<div class="container w-50 mt-5 p-4 border rounded shadow-sm bg-light">
+  <div class="mb-4 text-center">
+    <h2 class="text-primary">Manager Registrierung</h2>
+  </div>
+  <form
+    class="d-flex flex-column gap-3"
+    [formGroup]="validateForm"
+    (ngSubmit)="submitForm()"
+  >
+    <div class="form-group">
+      <label for="email" class="form-label">E-Mail:</label>
       <input
-        placeholder="password"
+        type="email"
+        class="form-control"
+        placeholder="E-Mail eingeben"
+        formControlName="email"
+        id="email"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="name" class="form-label">Name:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Name eingeben"
+        formControlName="name"
+        id="name"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="address" class="form-label">Adresse:</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Adresse eingeben"
+        formControlName="address"
+        id="address"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password" class="form-label">Passwort:</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Passwort eingeben"
         formControlName="password"
         id="password"
-        type="password"
       />
-      <label>paswordBestätigen:</label>
+    </div>
+
+    <div class="form-group">
+      <label for="passwordConfirmation" class="form-label"
+        >Passwortbestätigung:</label
+      >
       <input
-        placeholder="passwordConfirmation"
         type="password"
+        class="form-control"
+        placeholder="Passwort bestätigen"
         formControlName="passwordConfirmation"
         id="passwordConfirmation"
       />
-      <button type="submit">registrieren</button>
-    </form>
-  </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100 mt-3">
+      Registrieren
+    </button>
+  </form>
 </div>

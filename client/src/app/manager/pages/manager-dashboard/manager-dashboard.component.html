@@ -1,28 +1,28 @@
 <main class="dashboard-container">
   <p-toast></p-toast>
 
-  <!-- Boutons pour basculer entre les tableaux de bord -->
+  <!-- Schaltflächen zum Wechseln zwischen Dashboards -->
   <div class="dashboard-toggle-buttons">
     <button class="toggle-button" (click)="changeDashboard(true)">
-      Project Dashboard
+      Projekt-Dashboard
     </button>
     <button class="toggle-button" (click)="changeDashboard(false)">
-      Employee Dashboard
+      Mitarbeiter-Dashboard
     </button>
   </div>
 
-  <!-- Projet Dashboard -->
+  <!-- Projekt-Dashboard -->
   <project-dashboard
     *ngIf="isProjectDashboardActive; else employeeDashboard"
     [projects]="projects"
   >
   </project-dashboard>
 
-  <!-- Employee Dashboard -->
+  <!-- Mitarbeiter-Dashboard -->
   <ng-template #employeeDashboard>
-    <h1 class="title text-center">Beschäftige Dashboard</h1>
+    <h1 class="title text-center">Mitarbeiter-Dashboard</h1>
 
-    <!-- Filtre -->
+    <!-- Filter -->
     <mat-form-field appearance="outline" class="filter-field">
       <mat-label>Filter</mat-label>
       <mat-select
@@ -31,17 +31,17 @@
       >
         <mat-option [value]="0">Alle</mat-option>
         <mat-option [value]="1">Diese Woche</mat-option>
-        <mat-option [value]="2">Diese Monat</mat-option>
+        <mat-option [value]="2">Diesen Monat</mat-option>
       </mat-select>
     </mat-form-field>
 
-    <!-- Tableau des données des employés -->
+    <!-- Tabelle der Mitarbeiterdaten -->
     <table class="employee-table">
       <thead>
         <tr>
-          <th>Kollege</th>
+          <th>Mitarbeiter</th>
           <th>Aufgabe</th>
-          <th>Stunde</th>
+          <th>Stunden</th>
         </tr>
       </thead>
       <tbody>

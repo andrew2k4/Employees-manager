@@ -5,20 +5,20 @@
     [formGroup]="validateForm"
     (ngSubmit)="postProject()"
   >
-    <label for="projectName">Name</label>
+    <label for="projectName">Projektname</label>
     <input
       class="form-input"
       type="text"
-      placeholder="Projektname"
+      placeholder="Projektname eingeben"
       formControlName="projectName"
       id="projectName"
     />
 
-    <label for="clientName">Client</label>
+    <label for="clientName">Kunde</label>
     <input
       class="form-input"
       type="text"
-      placeholder="Kundenname"
+      placeholder="Kundenname eingeben"
       formControlName="client"
       id="clientName"
     />
@@ -26,7 +26,7 @@
     <label for="details">Details</label>
     <textarea
       class="form-textarea"
-      placeholder="Details"
+      placeholder="Details eingeben"
       formControlName="details"
       id="details"
     ></textarea>

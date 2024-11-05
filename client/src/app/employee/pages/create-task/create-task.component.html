@@ -3,37 +3,36 @@
   <form
     class="form-container d-flex flex-column w-50 m-auto"
     [formGroup]="validateForm"
-    (ngSubmit)="postProject()"
   >
-    <!-- Dropdown pour sélectionner un projet -->
-    <label for="project">Project</label>
+    <!-- Dropdown zur Auswahl eines Projekts -->
+    <label for="project">Projekt</label>
     <select formControlName="projectId" id="project" class="form-control">
       <option *ngFor="let project of projects" [value]="project.id">
-        {{ project.projectName || "Unnamed Project" }}
+        {{ project.projectName || "Unbenanntes Projekt" }}
       </option>
     </select>
 
-    <!-- Description du projet -->
-    <label for="description">Description</label>
-    <input
+    <!-- Beschreibung der Aufgabe -->
+    <label for="description">Beschreibung</label>
+    <textarea
       type="text"
-      placeholder="Description"
+      placeholder="Beschreibung"
       formControlName="description"
       id="description"
       class="form-control"
-    />
+    ></textarea>
 
-    <!-- Nombre d'heures -->
-    <label for="hours">Hours</label>
+    <!-- Anzahl der Stunden -->
+    <label for="hours">Stunden</label>
     <input
       type="number"
-      placeholder="Enter hours"
+      placeholder="Stundenzahl eingeben"
       formControlName="hours"
       id="hours"
       class="form-control"
     />
 
-    <!-- Bouton de soumission -->
+    <!-- Absenden-Button -->
     <button class="btn btn-primary mt-4" type="submit">Hinzufügen</button>
   </form>
 </main>
