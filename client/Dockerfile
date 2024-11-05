@@ -17,7 +17,7 @@ RUN npm install -g @angular/cli
 COPY . .
 
 # Build the Angular application
-RUN npm run build 
+RUN npm run build
 
 # Production Stage
 FROM nginx:latest
@@ -29,3 +29,4 @@ COPY --from=build /app/dist/service-booking-client/browser /usr/share/nginx/html
 
 # Expose port 80 to serve the application
 EXPOSE 80
+EXPOSE 443
