@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 services:
   app:
     build:
@@ -18,7 +18,7 @@ services:
   mysqldb:
     image: mysql:8.0.33
     ports:
-      - 8000:3306
+      - 8000:8000
     environment:
       - MYSQL_DATABASE=mydatabase
       - MYSQL_ROOT_PASSWORD=rootpassword
@@ -27,16 +27,16 @@ services:
     networks:
       - springboot-mysql-network
     healthcheck:
-      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       retries: 10
       interval: 3s
       timeout: 30s
-  client: 
+  client:
     build:
-      context: .
+      context: ../client
       dockerfile: ../client/Dockerfile
     ports:
-      - 4002:4002
+      - 80:80
     networks:
       - springboot-mysql-network
 volumes:
