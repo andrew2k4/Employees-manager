@@ -16,8 +16,6 @@ services:
       - springboot-mysql-network
   mysqldb:
     image: mysql:8.0.33
-    ports:
-      - 8000:8000
     environment:
       - MYSQL_DATABASE=mydatabase
       - MYSQL_ROOT_PASSWORD=rootpassword
@@ -35,8 +33,8 @@ services:
       context: ../client
       dockerfile: ../client/Dockerfile
     ports:
-      - 80:80
-      - 443:443
+      - 5888:80
+      - 5889:443
     networks:
       - springboot-mysql-network
 volumes:
