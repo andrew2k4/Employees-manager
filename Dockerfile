@@ -1,14 +1,23 @@
-# Step 1: Use a base image with JDK 17 or another JDK version compatible with your app
-FROM openjdk:17-jdk-alpine
-
-# Step 2: Set the working directory in the container
-WORKDIR /app
-
-# Step 3: Copy the JAR file from the local machine to the container
-COPY out/artifacts/service_booking_jar /app
-
-# Step 4: Expose the port your Spring Boot app runs on (default 8080)
+#
+# Build stage
+#
+FROM maven:3.8.3-openjdk-17 AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package
 EXPOSE 8080
+ENTRYPOINT ["java","-jar","/home/app/target/spring_rest_docker.jar"]
 
-# Step 5: Command to run the JAR file
-ENTRYPOINT ["java", "-jar", "service-booking.jar"]
+# Use a base image with Java 17
+FROM openjdk:17
+
+# Copy the JAR package into the image
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} app.jar
+RUN ./mvnw clean install -DskipTests
+
+# Expose the application port
+EXPOSE 8090
+
+# Run the App
+ENTRYPOINT ["java", "-jar", "/app.jar"]
