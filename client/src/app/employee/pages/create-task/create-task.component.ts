@@ -38,7 +38,7 @@ export class CreateTaskComponent implements OnInit {
     });
   }
 
-  postProject(): void {
+  postTask(): void {
     if (this.validateForm.invalid) {
       for (const i in this.validateForm.controls) {
         if (this.validateForm.controls.hasOwnProperty(i)) {

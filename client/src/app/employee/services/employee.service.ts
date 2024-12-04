@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserStorageService } from '../../basic/services/storage/user-storage.service';
-const Basic_Url = 'http://localhost:8090/';
+const Basic_Url = '/api/';
 
 @Injectable({
   providedIn: 'root',
@@ -14,24 +14,20 @@ export class EmployeeService {
     const userId = UserStorageService.getUserId();
 
     console.log(projectDto, UserStorageService.getToken());
-    return this.http.post(
-      `${Basic_Url}api/manager/project/${userId}`,
-      projectDto,
-      {
-        headers: this.createAuthorizationHeader(),
-      }
-    );
+    return this.http.post(`${Basic_Url}employee/task/${userId}`, projectDto, {
+      headers: this.createAuthorizationHeader(),
+    });
   }
 
   postTask(taskDto: any): Observable<any> {
     const userId = UserStorageService.getUserId();
-    return this.http.post(`${Basic_Url}api/manager/task/${userId}`, taskDto, {
+    return this.http.post(`${Basic_Url}employee/task/${userId}`, taskDto, {
       headers: this.createAuthorizationHeader(),
     });
   }
 
   getAllProjects(): Observable<any> {
-    return this.http.get(`${Basic_Url}api/manager/projects`, {
+    return this.http.get(`${Basic_Url}manager/projects`, {
       headers: this.createAuthorizationHeader(),
     });
   }

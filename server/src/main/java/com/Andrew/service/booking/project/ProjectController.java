@@ -21,12 +21,12 @@ public class ProjectController {
 
 
     // FOR ALL
-    @GetMapping({"/projects"})
+    @GetMapping({"/manager/projects"})
     public ResponseEntity<?> getAllProjects(){
         return ResponseEntity.ok(projectService.getAllProject());
     }
 
-    @GetMapping({"/projects/dashboard"})
+    @GetMapping({"/manager/projects/dashboard"})
     public ResponseEntity<?> getDashboard(){
         return ResponseEntity.ok(projectService.getProjectDashboard());
     }
@@ -44,7 +44,7 @@ public class ProjectController {
 
 
     // For MANAGER
-    @PostMapping("/manager/project/{userId}")
+    @PostMapping({"/manager/project/{userId}"})
     public ResponseEntity<?> postProject(@PathVariable long userId, @RequestBody DashboardDto projectDto){
 
 

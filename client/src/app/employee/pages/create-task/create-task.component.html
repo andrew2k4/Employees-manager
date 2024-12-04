@@ -3,7 +3,7 @@
   <form
     class="form-container d-flex flex-column w-50 m-auto"
     [formGroup]="validateForm"
-    (submit)="postProject()"
+    (ngSubmit)="postTask()"
   >
     <!-- Dropdown zur Auswahl eines Projekts -->
     <label for="project">Projekt</label>
