@@ -1,10 +1,11 @@
 services:
-  app:
+  server:
+    container_name: app
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8090:8090
+      - 8090:80
     depends_on:
       mysqldb:
         condition: service_healthy
@@ -29,12 +30,14 @@ services:
       interval: 3s
       timeout: 30s
   client:
+    container_name: client
     build:
       context: ../client
       dockerfile: ../client/Dockerfile
     ports:
       - 5888:80
-      - 5889:443
+    depends_on:
+      - server
     networks:
       - springboot-mysql-network
 volumes:

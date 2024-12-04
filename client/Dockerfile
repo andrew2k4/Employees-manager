@@ -27,6 +27,3 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy the built Angular files from the build stage
 COPY --from=build /app/dist/service-booking-client/browser /usr/share/nginx/html
 
-# Expose port 80 to serve the application
-EXPOSE 80
-EXPOSE 443
