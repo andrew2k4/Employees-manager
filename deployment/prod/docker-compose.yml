@@ -1,0 +1,47 @@
+services:
+  server:
+    container_name: app
+    build:
+      context: ../../services/client
+      dockerfile: ../../services/client/Dockerfile
+    ports:
+      - 8090:80
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/mydatabase
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=rootpassword
+    networks:
+      - springboot-mysql-network
+  mysqldb:
+    image: mysql:8.0.33
+    environment:
+      - MYSQL_DATABASE=mydatabase
+      - MYSQL_ROOT_PASSWORD=rootpassword
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - springboot-mysql-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      retries: 10
+      interval: 3s
+      timeout: 30s
+  client:
+    container_name: client
+    build:
+      context: ../../services/client
+      dockerfile: ../../services/client/Dockerfile
+    ports:
+      - 5888:80
+    depends_on:
+      - server
+    networks:
+      - springboot-mysql-network
+volumes:
+  mysql-data:
+networks:
+  springboot-mysql-network:
+    name: springboot-mysql-network

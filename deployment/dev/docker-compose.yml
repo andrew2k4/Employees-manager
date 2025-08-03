@@ -2,10 +2,8 @@ services:
   server:
     container_name: app
     build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 8090:80
+      context: ../../services/server
+      dockerfile: ../../services/server/Dockerfile
     depends_on:
       mysqldb:
         condition: service_healthy
@@ -29,11 +27,11 @@ services:
       retries: 10
       interval: 3s
       timeout: 30s
-  client:
-    container_name: client
+  gateway:
+    container_name: gateway
     build:
-      context: ../client
-      dockerfile: ../client/Dockerfile
+      context: ../../services/
+      dockerfile: gateway/Dockerfile
     ports:
       - 5888:80
     depends_on:
