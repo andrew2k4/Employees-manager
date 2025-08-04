@@ -38,8 +38,11 @@ services:
       - server
     networks:
       - springboot-mysql-network
+    volumes:
+      - ../../services/client/dist/service-booking-client/browser:/usr/share/nginx/html
 volumes:
   mysql-data:
+
 networks:
   springboot-mysql-network:
     name: springboot-mysql-network
