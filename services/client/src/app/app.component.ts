@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserStorageService } from './basic/services/storage/user-storage.service';
+import { UserStorageService } from './features/auth/storage/user-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { UserStorageService } from './basic/services/storage/user-storage.servic
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
-  title = 'ServiceBookingClient';
+  title = 'Sommermetallwerkstatt';
   isEmployeeLoggedIn: boolean = UserStorageService.isEmployeeLoggedIn();
   isManagerLoggedIn: boolean = UserStorageService.isManagerLoggedIn();
 

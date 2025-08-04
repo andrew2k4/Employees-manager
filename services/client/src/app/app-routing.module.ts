@@ -1,26 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SignupManagerComponent } from './basic/component/signup-manager/signup-manager.component';
-import { LoginComponent } from './basic/component/login/login.component';
-import { RegisterComponent } from './basic/component/register/register.component';
-import { SignupEmployeeComponent } from './basic/component/signup-employee/signup-employee.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'register-employee', component: SignupEmployeeComponent },
-  { path: 'register-manager', component: SignupManagerComponent },
-  { path: 'register', component: RegisterComponent },
+  {
+    path: '',
+    loadChildren: () =>
+      import('./features/auth/auth.module').then((m) => m.AuthModule),
+  },
   {
     path: 'employee',
     loadChildren: () =>
-      import('./employee/employee.module').then((m) => m.EmployeeModule),
+      import('./features/employee/employee.module').then(
+        (m) => m.EmployeeModule
+      ),
   },
   {
     path: 'manager',
     loadChildren: () =>
-      import('./manager/manager.module').then((m) => m.ManagerModule),
+      import('./features/manager/manager.module').then((m) => m.ManagerModule),
   },
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 @NgModule({

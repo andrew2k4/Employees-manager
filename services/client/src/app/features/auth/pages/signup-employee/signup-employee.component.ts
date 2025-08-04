@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-signup-manager',
-  templateUrl: './signup-manager.component.html',
-  styleUrl: './signup-manager.component.scss',
+  selector: 'app-signup-employee',
+  templateUrl: './signup-employee.component.html',
+  styleUrl: './signup-employee.component.scss',
 })
-export class SignupManagerComponent {
+export class SignupEmployeeComponent {
   validateForm!: FormGroup;
 
   constructor(
@@ -22,7 +22,7 @@ export class SignupManagerComponent {
       {
         email: [null, [Validators.email, Validators.required]],
         name: [null, [Validators.required]],
-        address: [null, [Validators.required]],
+        lastName: [null, [Validators.required]],
         phone: [null],
         password: [null, [Validators.required]],
         passwordConfirmation: [null, [Validators.required]],
@@ -47,7 +47,7 @@ export class SignupManagerComponent {
 
   submitForm() {
     if (this.validateForm.valid) {
-      this.authService.registerCompany(this.validateForm.value).subscribe(
+      this.authService.registerClient(this.validateForm.value).subscribe(
         (res) => {
           this.router.navigateByUrl('/login');
         },
