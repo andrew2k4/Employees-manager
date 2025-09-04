@@ -7,21 +7,25 @@ import { UserStorageService } from '../../auth/storage/user-storage.service';
   providedIn: 'root',
 })
 export class ManagerService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private userStorage: UserStorageService
+  ) {}
 
   projectToUpdate: any;
 
   postProject(projectDto: any): Observable<any> {
-    const userId = UserStorageService.getUserId();
+    const userId = this.userStorage.getUserId();
+    const token = this.userStorage.getToken();
 
-    console.log(projectDto, UserStorageService.getToken());
+    console.log(projectDto, token);
     return this.http.post(`/api/manager/project/${userId}`, projectDto, {
       headers: this.createAuthorizationHeader(),
     });
   }
 
   postTask(taskDto: any): Observable<any> {
-    const userId = UserStorageService.getUserId();
+    const userId = this.userStorage.getUserId();
     return this.http.post(`/api/employee/task/${userId}`, taskDto, {
       headers: this.createAuthorizationHeader(),
     });
@@ -33,7 +37,7 @@ export class ManagerService {
     });
   }
 
-  getProjectById(id): Observable<any> {
+  getProjectById(id: number): Observable<any> {
     return this.http.get(`/api/project/${id}`, {
       headers: this.createAuthorizationHeader(),
     });
@@ -51,17 +55,17 @@ export class ManagerService {
     });
   }
 
-  createAuthorizationHeader(): HttpHeaders {
-    const token = UserStorageService.getToken();
-    return new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json',
+  updateProject(projectId: number, project: any): Observable<any> {
+    return this.http.put(`/api/manager/project/${projectId}`, project, {
+      headers: this.createAuthorizationHeader(),
     });
   }
 
-  updateProject(projectId, project: any): Observable<any> {
-    return this.http.put(`/api/manager/project/${projectId}`, project, {
-      headers: this.createAuthorizationHeader(),
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = this.userStorage.getToken();
+    return new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
   }
 }
