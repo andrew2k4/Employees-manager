@@ -1,66 +1,49 @@
 import { Injectable } from '@angular/core';
 
-const TOKEN = 's_Token';
-const USER = 's_ User';
+const TOKEN_KEY = 'auth-token';
+const USER_KEY = 'auth-user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserStorageService {
-  constructor() {}
-  public saveToken(token: string): void {
-    window.localStorage.removeItem(TOKEN);
-    window.localStorage.setItem(TOKEN, token);
+  private USER_KEY = 'user';
+  private TOKEN_KEY = 'token';
+
+  saveUser(user: any) {
+    localStorage.setItem(this.USER_KEY, JSON.stringify(user));
   }
 
-  static getToken(): string {
-    return localStorage.getItem(TOKEN);
+  getUser() {
+    const user = localStorage.getItem(this.USER_KEY);
+    return user ? JSON.parse(user) : null;
   }
 
-  public saveUser(user: string): void {
-    window.localStorage.removeItem(USER);
-    window.localStorage.setItem(USER, JSON.stringify(user));
+  saveToken(token: string) {
+    localStorage.setItem(this.TOKEN_KEY, token);
   }
 
-  static getUSer(): any {
-    return JSON.parse(localStorage.getItem(USER));
+  getToken(): string | null {
+    return localStorage.getItem(this.TOKEN_KEY);
   }
 
-  static getUserId(): string {
-    const user = this.getUSer();
-    if (user === null) {
-      return '';
-    }
-    return user.userId;
+  getUserId(): string | null {
+    return this.getUser()?.userId || null;
   }
 
-  static getUserRole(): string {
-    const user = this.getUSer();
-    if (user === null) {
-      return '';
-    }
-
-    return user.role;
+  isManager(): boolean {
+    return this.getUser()?.role === 'MANAGER';
   }
 
-  static isEmployeeLoggedIn(): boolean {
-    if (this.getToken() === null) {
-      return false;
-    }
-    const role: string = this.getUserRole();
-    return role === 'EMPLOYEE';
+  isEmployee(): boolean {
+    return this.getUser()?.role === 'EMPLOYEE';
   }
 
-  static isManagerLoggedIn(): boolean {
-    if (this.getToken() === null) {
-      return false;
-    }
-    const role: string = this.getUserRole();
-    return role === 'MANAGER';
+  isLogged(): boolean {
+    return !!this.getToken();
   }
 
-  static signOut(): void {
-    window.localStorage.removeItem(TOKEN);
-    window.localStorage.removeItem(USER);
+  clear() {
+    localStorage.clear();
   }
 }
