@@ -1,9 +1,31 @@
-.form-label {
-  font-size: 14px;
-  font-weight: bold;
-}
+.form-container {
+  min-height: 100vh;
+  background: #f5f7fa;
+  padding: 2rem;
 
-.form {
-  width: 25%;
-  margin: auto;
+  .login-form {
+    width: 100%;
+    max-width: 400px;
+    background: #fff;
+    border-radius: 12px;
+
+    h2 {
+      font-weight: 600;
+    }
+
+    .form-control {
+      border-radius: 8px;
+      padding: 0.75rem;
+      font-size: 15px;
+
+      &:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.1rem rgba(13, 110, 253, 0.25);
+      }
+    }
+
+    button {
+      border-radius: 8px;
+    }
+  }
 }

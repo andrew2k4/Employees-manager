@@ -1,28 +1,43 @@
-<div class="form-container">
-  <form class="form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
-    <h2 class="font-size-20 text-center pb-3">Anmelden</h2>
-    <div class="form-group pb-2">
-      <label for="exampleInputEmail1" class="form-label p-0">E-Mail</label>
+<div class="form-container d-flex align-items-center justify-content-center">
+  <form
+    class="login-form p-4 rounded shadow bg-white"
+    [formGroup]="validateForm"
+    (ngSubmit)="submitForm()"
+  >
+    <h2 class="text-center mb-4 text-primary">Anmeldung</h2>
+
+    <div class="form-group mb-3">
+      <label for="username" class="form-label">E-Mail-Adresse</label>
       <input
-        formControlName="username"
+        id="username"
         type="email"
         class="form-control"
-        id="username"
-        aria-describedby="emailHelp"
+        formControlName="username"
         placeholder="E-Mail eingeben"
+        required
       />
     </div>
-    <div class="form-group pb-5">
-      <label for="exampleInputPassword1" class="form-label">Passwort</label>
+
+    <div class="form-group mb-4">
+      <label for="password" class="form-label">Passwort</label>
       <input
-        formControlName="password"
+        id="password"
         type="password"
-        class="form-control m-0"
-        id="exampleInputPassword1"
+        class="form-control"
+        formControlName="password"
         placeholder="Passwort"
+        required
       />
     </div>
-    <p-toast />
-    <button type="submit" class="btn btn-primary">Einreichen</button>
+
+    <p-toast></p-toast>
+
+    <button
+      type="submit"
+      class="btn btn-primary w-100 py-2 fw-semibold"
+      [disabled]="validateForm.invalid"
+    >
+      Einreichen
+    </button>
   </form>
 </div>

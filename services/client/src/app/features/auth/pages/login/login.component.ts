@@ -8,7 +8,7 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  styleUrls: ['./login.component.scss'], // styleUrl -> styleUrls (bug corrigé)
   providers: [MessageService],
 })
 export class LoginComponent {
@@ -18,7 +18,8 @@ export class LoginComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private userStorage: UserStorageService // ✅ injecte ton service ici
   ) {}
 
   ngOnInit() {
@@ -32,23 +33,22 @@ export class LoginComponent {
     this.authService
       .login(
         this.validateForm.get('username')?.value,
-        this.validateForm.get(['password'])?.value
+        this.validateForm.get('password')?.value
       )
       .subscribe(
-        (res) => {
-          console.log(res);
-          if (UserStorageService.isEmployeeLoggedIn()) {
-            this.router.navigateByUrl('employee/dashboard');
-          } else if (UserStorageService.isManagerLoggedIn()) {
-            this.router.navigateByUrl('manager/dashboard');
+        () => {
+          // ✅ on utilise les méthodes d’instance, pas des statiques
+          if (this.userStorage.isEmployee()) {
+            this.router.navigateByUrl('/employee/dashboard');
+          } else if (this.userStorage.isManager()) {
+            this.router.navigateByUrl('/manager/dashboard');
           }
         },
-        (error) => {
-          console.error('Big Error');
+        () => {
           this.messageService.add({
             severity: 'error',
-            summary: 'anmeldung',
-            detail: 'E-mail oder password ist faslche',
+            summary: 'Anmeldung',
+            detail: 'E-Mail oder Passwort ist falsch',
           });
         }
       );
