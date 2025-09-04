@@ -2,25 +2,30 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserStorageService } from '../../auth/storage/user-storage.service';
+
 const Basic_Url = '/api/';
 
 @Injectable({
   providedIn: 'root',
 })
 export class EmployeeService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private userStorage: UserStorageService // ✅ injection du service
+  ) {}
 
   postProject(projectDto: any): Observable<any> {
-    const userId = UserStorageService.getUserId();
+    const userId = this.userStorage.getUserId();
+    const token = this.userStorage.getToken();
 
-    console.log(projectDto, UserStorageService.getToken());
+    console.log(projectDto, token);
     return this.http.post(`${Basic_Url}employee/task/${userId}`, projectDto, {
       headers: this.createAuthorizationHeader(),
     });
   }
 
   postTask(taskDto: any): Observable<any> {
-    const userId = UserStorageService.getUserId();
+    const userId = this.userStorage.getUserId();
     return this.http.post(`${Basic_Url}employee/task/${userId}`, taskDto, {
       headers: this.createAuthorizationHeader(),
     });
@@ -32,11 +37,11 @@ export class EmployeeService {
     });
   }
 
-  createAuthorizationHeader(): HttpHeaders {
-    const token = UserStorageService.getToken(); // Récupérer le token
+  private createAuthorizationHeader(): HttpHeaders {
+    const token = this.userStorage.getToken(); // ✅ via instance
     return new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Ajouter le token dans le header d'autorisation
-      'Content-Type': 'application/json', // Préciser que le corps est du JSON
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
     });
   }
 }
