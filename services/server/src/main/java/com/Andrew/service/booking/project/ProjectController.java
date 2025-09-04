@@ -3,6 +3,8 @@ package com.Andrew.service.booking.project;
 
 import com.Andrew.service.booking.project.dto.DashboardDto;
 import com.Andrew.service.booking.project.dto.ProjectDetailsDto;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.persistence.TableGenerators;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api")
+@Tag(name="Project" , description = "Manage projects")
 public class ProjectController {
 
 
