@@ -7,4 +7,8 @@ import { Input } from '@angular/core';
 })
 export class ProjectDashboardComponent {
   @Input() projects: any;
+
+  getTotalHours(users: any[] = []): number {
+    return users.reduce((sum, user) => sum + (user.workHours || 0), 0);
+  }
 }

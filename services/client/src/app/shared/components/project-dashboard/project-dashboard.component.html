@@ -1,36 +1,56 @@
-<h1 class="title text-center mb-5">Projekt-Dashboard</h1>
+<h1 class="title text-center mb-4">📊 Projekt-Dashboard</h1>
 
-<table class="project-table m-auto">
-  <thead>
-    <tr>
-      <th>Projekte</th>
-      <th>Datum</th>
-      <th>Kunde</th>
-      <th>Mitarbeiter</th>
-      <th>Arbeitszeit</th>
-      <th>Gesamtarbeitszeit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let project of projects; let i = index">
-      <td>
-        <a [routerLink]="['/manager/project', project.id]">
-          {{ project.projectName }}
-        </a>
-      </td>
-      <td>{{ project.createdAt | date : "dd/MM/yyyy" }}</td>
-      <td>{{ project.clientName }}</td>
-      <td>
-        <ul>
-          <li *ngFor="let user of project.users">{{ user.name }}</li>
-        </ul>
-      </td>
-      <td>
-        <ul>
-          <li *ngFor="let user of project.users">{{ user.workHours }}</li>
-        </ul>
-      </td>
-      <td>{{ project.workHours }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="table-responsive shadow-sm rounded">
+  <table
+    class="table table-striped table-hover table-bordered text-center align-middle mb-0"
+  >
+    <thead class="table-dark">
+      <tr>
+        <th>Projekt</th>
+        <th>Erstellt am</th>
+        <th>Kunde</th>
+        <th>Mitarbeiter & Arbeitszeit</th>
+        <th>Gesamtarbeitszeit</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let project of projects; let i = index">
+        <!-- Projektname -->
+        <td class="fw-bold">
+          <a
+            [routerLink]="['/manager/project', project.id]"
+            class="text-decoration-none"
+          >
+            {{ project.projectName }}
+          </a>
+        </td>
+
+        <!-- Datum -->
+        <td>{{ project.createdAt | date : "dd/MM/yyyy" }}</td>
+
+        <!-- Kunde -->
+        <td>{{ project.clientName }}</td>
+
+        <!-- Mitarbeiter + Arbeitsstunden -->
+        <td>
+          <div *ngIf="project.users?.length; else noUsers">
+            <ul class="list-unstyled mb-0">
+              <li *ngFor="let user of project.users">
+                <span class="fw-semibold">{{ user.name }}</span>
+                <span class="text-muted">– {{ user.workHours }} Std</span>
+              </li>
+            </ul>
+          </div>
+          <ng-template #noUsers>
+            <em class="text-muted">Keine Mitarbeiter</em>
+          </ng-template>
+        </td>
+
+        <!-- Gesamtarbeitszeit -->
+        <td class="fw-bold text-primary">
+          {{ getTotalHours(project.users) }} Std
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
