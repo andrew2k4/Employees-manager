@@ -26,6 +26,7 @@ import { RippleModule } from 'primeng/ripple';
 import { SharedModule } from './shared/shared.module';
 import { ManagerModule } from './features/manager/manager.module';
 import { EmployeeModule } from './features/employee/employee.module';
+import { CoreModule } from './core/core.module';
 registerLocaleData(en);
 
 @NgModule({
@@ -33,6 +34,7 @@ registerLocaleData(en);
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    CoreModule,
     AppRoutingModule,
     FormsModule,
     NgbModule,

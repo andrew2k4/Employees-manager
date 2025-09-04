@@ -1,51 +1,55 @@
-/* Styles pour la barre de navigation latérale */
-.sidebar {
-  height: 100vh; /* Prend toute la hauteur de la vue */
-  width: 250px; /* Largeur de la barre de navigation */
-  background-color: #f8f9fa; /* Couleur de fond */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Ombre douce */
-  position: fixed; /* Reste fixe lors du défilement */
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column; /* Alignement vertical */
+.navbar {
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #0d6efd;
+    }
+
+    mat-icon {
+      font-size: 24px;
+      color: inherit;
+    }
+  }
+
+  .navbar-brand {
+    color: #0d6efd;
+  }
+}
+.text-gold {
+  background: linear-gradient(45deg, #b8860b, #ffd700, #ffd700, #b8860b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+.text-gold {
+  color: #d4af37 !important;
 }
 
-/* En-tête de la barre de navigation */
-.sidebar-header {
-  padding: 20px;
-  background-color: #007bff; /* Couleur d'arrière-plan de l'en-tête */
-  color: #ffffff; /* Couleur du texte */
-  text-align: center; /* Centre le texte */
-}
-
-/* Contenu de la barre de navigation */
-.sidebar-content {
-  padding: 10px; /* Espacement interne */
-}
-
-/* Style des boutons de connexion et de déconnexion */
-.login-button,
-.logout-button {
-  padding: 15px;
-  background-color: #007bff; /* Couleur de fond des boutons */
-  color: #fff; /* Couleur du texte */
-  border: none;
-  border-radius: 5px;
-  text-decoration: none;
+.navbar .nav-link {
   display: flex;
   align-items: center;
-  margin: 10px 0; /* Espacement vertical entre les boutons */
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  gap: 6px;
+  font-weight: 500;
+  transition: color 0.2s ease-in-out;
 }
 
-.login-button:hover,
-.logout-button:hover {
-  background-color: #0056b3; /* Couleur de fond au survol */
-  transform: translateY(-2px); /* Légère élévation au survol */
+.navbar .nav-link:hover {
+  color: #d4af37;
 }
 
-/* Icônes dans les boutons */
-.icon-display {
-  margin-right: 10px; /* Espacement entre l'icône et le texte */
+@media (max-width: 992px) {
+  .navbar-nav {
+    gap: 1rem;
+    text-align: center;
+  }
 }

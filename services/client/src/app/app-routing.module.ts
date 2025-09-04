@@ -19,7 +19,8 @@ const routes: Routes = [
     loadChildren: () =>
       import('./features/manager/manager.module').then((m) => m.ManagerModule),
   },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  // Wildcard → redirection vers /login
+  { path: '**', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
