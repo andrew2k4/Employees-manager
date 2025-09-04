@@ -4,6 +4,7 @@
 @import "bootstrap/scss/bootstrap";
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
 
 html,
 body {
@@ -12,4 +13,29 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Mode sombre */
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .navbar {
+  background-color: #1f1f1f !important;
+}
+
+.dark-mode .nav-link {
+  color: #e0e0e0 !important;
+}
+
+.dark-mode .nav-link:hover {
+  color: #d4af37 !important;
+}
+
+.dark-mode main {
+  background-color: #181818;
+  color: #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
 }
