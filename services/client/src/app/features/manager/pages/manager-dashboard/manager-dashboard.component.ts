@@ -22,6 +22,7 @@ export class ManagerDashboardComponent {
   ) {}
 
   ngOnInit() {
+    console.log('andreww');
     this.getProjectDashboard();
     this.getUserDashboard();
     const toastMessage = history.state.toastMessage;
